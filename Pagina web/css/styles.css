@@ -53,12 +53,13 @@ a { color: inherit; text-decoration: none; }
 img { max-width: 100%; display: block; }
 
 /* ---- CUSTOM CURSOR ---- */
-#cur, #cur-r {
-  position: fixed;
-  border-radius: 50%;
+#cur, #cur-r, .ph {
   pointer-events: none;
-  z-index: 9999;
-  transform: translate(-50%, -50%);
+}
+.ph {
+  font-size: 1.2em;
+  vertical-align: middle;
+  line-height: 1;
 }
 #cur {
   width: 10px; height: 10px;

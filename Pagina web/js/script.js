@@ -151,7 +151,7 @@ function toggleT() {
   const h = document.documentElement;
   const isDark = h.getAttribute('data-theme') === 'dark';
   h.setAttribute('data-theme', isDark ? 'light' : 'dark');
-  document.getElementById('tb').textContent = isDark ? '🌙' : '☀';
+  document.getElementById('tb').innerHTML = isDark ? '<i class="ph ph-moon"></i>' : '<i class="ph ph-sun"></i>';
 }
 
 /* ---- LOADER — EFECTO SCRAMBLE ---- */
