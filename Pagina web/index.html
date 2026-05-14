@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lorena Rojas Arango — Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+  <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.4.0/model-viewer.min.js"></script>
+</head>
+
+<body>
+
+  <!-- Cursor -->
+  <div id="cur"></div>
+  <div id="cur-r"></div>
+
+  <!-- Loader -->
+  <div id="loader">
+    <div id="lt">LORENA</div>
+    <div id="lb"></div>
+  </div>
+
+  <!-- Menú móvil -->
+  <div class="mm" id="mm">
+    <a href="#about" data-i18n="nav_about" onclick="closeMM()">Sobre mí</a>
+    <a href="#projects" data-i18n="nav_projects" onclick="closeMM()">Proyectos</a>
+    <a href="#skills" data-i18n="nav_skills" onclick="closeMM()">Habilidades</a>
+    <a href="#achievements" data-i18n="nav_achievements" onclick="closeMM()">Logros</a>
+    <a href="#contact" data-i18n="nav_contact" onclick="closeMM()">Contacto</a>
+  </div>
+
+  <!-- Navbar -->
+  <nav id="nav">
+    <div class="logo">LRA</div>
+    <ul class="nl">
+      <li><a href="#about" data-i18n="nav_about">Sobre mí</a></li>
+      <li><a href="#projects" data-i18n="nav_projects">Proyectos</a></li>
+      <li><a href="#skills" data-i18n="nav_skills">Habilidades</a></li>
+      <li><a href="#achievements" data-i18n="nav_achievements">Logros</a></li>
+      <li><a href="#contact" data-i18n="nav_contact">Contacto</a></li>
+    </ul>
+    <div class="nc">
+      <button class="lb2 on" id="bes" onclick="setL('es')">ES</button>
+      <button class="lb2" id="ben" onclick="setL('en')">EN</button>
+      <button class="tb" id="tb" onclick="toggleT()">☀</button>
+      <button class="hb" id="hb" onclick="toggleMM()">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section id="hero">
+    <div class="hbg"></div>
+    <div class="hcont">
+      <p class="heyb" data-i18n="eyebrow">Universidad de Medellín · Comunicación y Entretenimiento Digital</p>
+      <h1 class="hn">Lorena<br><span class="hi">Rojas</span></h1>
+      <p class="htag" data-i18n="hero_tag">Comunicadora · Diseñadora · Creadora</p>
+      <a href="#projects" class="hcta">
+        <span data-i18n="hero_cta">Ver mis proyectos</span>
+        <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+          <path d="M5 12h14M12 5l7 7-7 7" />
+        </svg>
+      </a>
+    </div>
+    <div class="hsc">
+      <div class="hsl"></div><span>scroll</span>
+    </div>
+  </section>
+
+  <!-- About -->
+  <div id="about">
+    <div class="aiw rv">
+      <div class="aip">
+        <svg width="44" height="44" fill="none" stroke="currentColor" stroke-width="1" viewBox="0 0 24 24">
+          <circle cx="12" cy="8" r="4" />
+          <path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" />
+        </svg>
+        <span style="font-size:.65rem;letter-spacing:.15em">FOTO · PRÓXIMAMENTE</span>
+      </div>
+    </div>
+    <div class="at rv">
+      <p class="lbl" data-i18n="nav_about">Sobre mí</p>
+      <h2 class="st" data-i18n="a_hello">Hola, soy Lorena.</h2>
+      <p data-i18n="a_p1">Soy estudiante de <strong>Comunicación y Entretenimiento Digital</strong> en la Universidad de
+        Medellín. Creo universos transmedia, diseño experiencias visuales y cuento historias que conectan con las
+        audiencias.</p>
+      <p data-i18n="a_p2">Mi trabajo cruza mundos: del diseño a la animación 3D, de la investigación académica al
+        desarrollo web. No solo creo — entiendo a quién le hablo y por qué.</p>
+      <div class="bgs">
+        <span class="bg">Transmedia</span>
+        <span class="bg">UI/UX</span>
+        <span class="bg">Blender 3D</span>
+        <span class="bg">Animación 2D</span>
+        <span class="bg">Investigación</span>
+        <span class="bg">Premiere</span>
+        <span class="bg">Illustrator</span>
+        <span class="bg">Web Dev</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Projects -->
+  <div class="sc" id="projects">
+    <p class="lbl" data-i18n="nav_projects">Proyectos</p>
+    <h2 class="st rv" data-i18n="proj_t">Mi trabajo.</h2>
+    <div class="pfil rv">
+      <button class="fb on" data-f="all" data-i18n="f_all">Todos</button>
+      <button class="fb" data-f="design" data-i18n="f_design">Diseño</button>
+      <button class="fb" data-f="animation" data-i18n="f_anim">Animación</button>
+      <button class="fb" data-f="3d" data-i18n="f_3d">3D</button>
+      <button class="fb" data-f="research" data-i18n="f_res">Investigación</button>
+      <button class="fb" data-f="dev" data-i18n="f_dev">UX/UI</button>
+    </div>
+    <div class="pg" id="pg">
+
+      <!-- Proyecto Animación Caminata Emem -->
+      <div class="pc rv rect" data-c="animation">
+        <video src="assets/animacion-caminata-emem.mp4" autoplay loop muted playsinline
+          style="width: 100%; height: 100%; object-fit: cover;"></video>
+        <div class="pns" style="pointer-events: none;">
+          <div class="pns-c" data-i18n="c_an">Animación</div>
+          <div class="pns-n" data-i18n="p13n">Caminata de Emem (Duik Angela)</div>
+        </div>
+        <div class="po" style="pointer-events: none;">
+          <div class="pi">
+            <p class="pcat" data-i18n="c_an">Animación</p>
+            <p class="pname" data-i18n="p13n">Caminata de Emem (Duik Angela)</p>
+            <p class="pdesc" data-i18n="p13d">Ciclo de caminata de personaje 2D 'Emem' creado en Adobe Premiere Pro
+              utilizando Duik Angela para el rigging.</p>
+            <div class="ptgs"><span class="ptg">Premiere</span><span class="ptg">Duik Angela</span><span
+                class="ptg">2D</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Proyecto Animación Tradicional Emem -->
+      <div class="pc rv rect" data-c="animation">
+        <video src="assets/animacion-tradicional-emem.mp4" autoplay loop muted playsinline
+          style="width: 100%; height: 100%; object-fit: cover;"></video>
+        <div class="pns" style="pointer-events: none;">
+          <div class="pns-c" data-i18n="c_an">Animación</div>
+          <div class="pns-n" data-i18n="p14n">Animación Tradicional de Emem</div>
+        </div>
+        <div class="po" style="pointer-events: none;">
+          <div class="pi">
+            <p class="pcat" data-i18n="c_an">Animación</p>
+            <p class="pname" data-i18n="p14n">Animación Tradicional de Emem</p>
+            <p class="pdesc" data-i18n="p14d">Animación 2D realizada cuadro a cuadro (frame por frame) del personaje
+              'Emem', explorando técnicas tradicionales en la suite de Adobe.</p>
+            <div class="ptgs"><span class="ptg">Adobe Suite</span><span class="ptg">Frame by Frame</span><span
+                class="ptg">2D</span></div>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- Proyecto 3D Interactivo -->
+      <div class="pc ft rv" data-c="3d">
+        <model-viewer src="assets/escenario-3d.glb" camera-controls auto-rotate rotation-per-second="30deg"
+          interaction-prompt="none"
+          style="width: 100%; height: 100%; background: radial-gradient(circle at center, #1C1C28, #0A0A0F);"></model-viewer>
+        <div class="pns" style="pointer-events: none;">
+          <div class="pns-c" data-i18n="c_3d">3D · Game</div>
+          <div class="pns-n" data-i18n="p8n">Escenario 3D Interactivo</div>
+        </div>
+        <div class="po" style="pointer-events: none;">
+          <div class="pi">
+            <p class="pcat" data-i18n="c_3d">3D · Videojuego</p>
+            <p class="pname" data-i18n="p8n">Escenario 3D Interactivo</p>
+            <p class="pdesc" data-i18n="p8d">Modelado y texturizado de escenario 3D en Blender. Explora el modelo
+              girándolo e interactuando con él directamente en el navegador.</p>
+            <div class="ptgs"><span class="ptg">Blender</span><span class="ptg">3D Web</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Proyecto Fantasma Pac-Man -->
+      <div class="pc rv" data-c="3d">
+        <model-viewer src="assets/fantasma-pacman.glb" camera-controls auto-rotate rotation-per-second="30deg"
+          interaction-prompt="none"
+          style="width: 100%; height: 100%; background: radial-gradient(circle at center, #2d1060, #140826);"></model-viewer>
+        <div class="pns" style="pointer-events: none;">
+          <div class="pns-c" data-i18n="c_3d">3D · Game</div>
+          <div class="pns-n" data-i18n="p9n">Fantasma Pac-Man</div>
+        </div>
+        <div class="po" style="pointer-events: none;">
+          <div class="pi">
+            <p class="pcat" data-i18n="c_3d">3D · Modelado</p>
+            <p class="pname" data-i18n="p9n">Fantasma Pac-Man</p>
+            <p class="pdesc" data-i18n="p9d">Modelado 3D interactivo del icónico fantasma de Pac-Man, creado en Blender.
+              Gira y explora el diseño directamente.</p>
+            <div class="ptgs"><span class="ptg">Blender</span><span class="ptg">3D Web</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Proyecto Caja de Madera -->
+      <div class="pc rv" data-c="3d">
+        <model-viewer src="assets/caja-madera.glb" camera-controls auto-rotate rotation-per-second="30deg"
+          interaction-prompt="none"
+          style="width: 100%; height: 100%; background: radial-gradient(circle at center, #2e2d10, #181808);"></model-viewer>
+        <div class="pns" style="pointer-events: none;">
+          <div class="pns-c" data-i18n="c_3d">3D · Game</div>
+          <div class="pns-n" data-i18n="p10n">Caja de Madera 3D</div>
+        </div>
+        <div class="po" style="pointer-events: none;">
+          <div class="pi">
+            <p class="pcat" data-i18n="c_3d">3D · Modelado</p>
+            <p class="pname" data-i18n="p10n">Caja de Madera 3D</p>
+            <p class="pdesc" data-i18n="p10d">Modelo 3D interactivo de una caja de madera, esculpida y texturizada en
+              Blender. Puedes rotarla para explorarla.</p>
+            <div class="ptgs"><span class="ptg">Blender</span><span class="ptg">3D Prop</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Proyecto Arma 3D -->
+      <div class="pc rv" data-c="3d">
+        <model-viewer src="assets/arma.glb" camera-controls auto-rotate rotation-per-second="30deg"
+          interaction-prompt="none"
+          style="width: 100%; height: 100%; background: radial-gradient(circle at center, #301010, #180808);"></model-viewer>
+        <div class="pns" style="pointer-events: none;">
+          <div class="pns-c" data-i18n="c_3d">3D · Game</div>
+          <div class="pns-n" data-i18n="p11n">Arma 3D</div>
+        </div>
+        <div class="po" style="pointer-events: none;">
+          <div class="pi">
+            <p class="pcat" data-i18n="c_3d">3D · Modelado</p>
+            <p class="pname" data-i18n="p11n">Arma 3D</p>
+            <p class="pdesc" data-i18n="p11d">Modelo 3D interactivo de un arma, diseñado y texturizado en Blender.
+              Explora los detalles girando el modelo.</p>
+            <div class="ptgs"><span class="ptg">Blender</span><span class="ptg">3D Prop</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Proyecto Casa Bruja -->
+      <div class="pc rv" data-c="3d">
+        <model-viewer src="assets/casa-bruja.glb" camera-controls auto-rotate rotation-per-second="30deg"
+          interaction-prompt="none"
+          style="width: 100%; height: 100%; background: radial-gradient(circle at center, #2a1b38, #100a18);"></model-viewer>
+        <div class="pns" style="pointer-events: none;">
+          <div class="pns-c" data-i18n="c_3d">3D · Game</div>
+          <div class="pns-n" data-i18n="p12n">Casa de Bruja VR</div>
+        </div>
+        <div class="po" style="pointer-events: none;">
+          <div class="pi">
+            <p class="pcat" data-i18n="c_3d">3D · Entorno VR</p>
+            <p class="pname" data-i18n="p12n">Casa de Bruja VR</p>
+            <p class="pdesc" data-i18n="p12d">Escenario 3D interactivo de una casa medieval temática de brujería,
+              modelado en Blender. Diseñado como menú de inicio inmersivo para un proyecto de realidad virtual.</p>
+            <div class="ptgs"><span class="ptg">Blender</span><span class="ptg">VR</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Proyecto 2 -->
+      <div class="pc ft rv" data-c="3d animation">
+        <video id="vid-proj2" src="assets/animacion-3d.mp4" autoplay loop muted playsinline
+          style="width: 100%; height: 100%; object-fit: cover;"></video>
+        <button id="btn-audio" class="audio-btn"
+          style="position: absolute; bottom: 20px; right: 20px; z-index: 10; background: rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.2); color: #fff; padding: 8px 16px; border-radius: 20px; cursor: pointer; backdrop-filter: blur(5px); font-family: 'DM Sans', sans-serif; font-size: 0.9rem; transition: background 0.3s;">🔇
+          Unmute</button>
+        <div class="pns" style="pointer-events: none;">
+          <div class="pns-c" data-i18n="c_3da">3D · Animación</div>
+          <div class="pns-n" data-i18n="p2n">Animación 3D en Blender</div>
+        </div>
+        <div class="po" style="pointer-events: none;">
+          <div class="pi">
+            <p class="pcat" data-i18n="c_3da">3D · Animación</p>
+            <p class="pname" data-i18n="p2n">Animación 3D en Blender</p>
+            <p class="pdesc" data-i18n="p2d">Producción de animación 3D con modelado, iluminación y renderizado en
+              Blender.</p>
+            <div class="ptgs"><span class="ptg">Blender</span><span class="ptg">3D Render</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Proyecto 1 -->
+      <div class="pc ft rv" data-c="design dev"
+        onclick="window.open('https://www.figma.com/proto/1ocLASVo5O3tWYtbEQmW6U/Re-Branging-Comunicaci%C3%B3n-y-Relaciones-Coorporativas?node-id=1-313&t=yYqwZpS8I8Yo2fD6-1', '_blank')">
+        <img src="assets/udem-rebranding.png" alt="Rebranding UdeM"
+          style="width:100%; height:100%; object-fit:cover; transition: transform .6s var(--ease);">
+        <div class="pns">
+          <div class="pns-c" data-i18n="c_dd">Diseño · UI/UX</div>
+          <div class="pns-n" data-i18n="p1n">Rebranding Web UdeM</div>
+        </div>
+        <div class="po">
+          <div class="pi">
+            <p class="pcat" data-i18n="c_dd">Diseño · UI/UX</p>
+            <p class="pname" data-i18n="p1n">Rebranding Web UdeM</p>
+            <p class="pdesc" data-i18n="p1d">Rediseño UI/UX de la página de Comunicación y Relaciones Corporativas de la
+              Universidad de Medellín. Explora el sistema visual completo en el prototipo interactivo.</p>
+            <div style="margin-top: 1rem; margin-bottom: 1rem;">
+              <span class="cb s"
+                style="padding: 0.5rem 1rem; font-size: 0.7rem; border-color: var(--pink); color: var(--pink);">
+                <svg width="12" height="12" fill="currentColor" viewBox="0 0 38 38" style="margin-right:5px">
+                  <path
+                    d="M19 0a9.5 9.5 0 0 0-9.5 9.5c0 2.62 1.07 4.99 2.8 6.69A9.501 9.501 0 0 0 9.5 28.5 9.5 9.5 0 0 0 19 38a9.5 9.5 0 0 0 9.5-9.5 9.5 9.5 0 0 0-2.8-6.69c1.73-1.7 2.8-4.07 2.8-6.69A9.5 9.5 0 0 0 19 0zm0 4.75a4.75 4.75 0 1 1 0 9.5 4.75 4.75 0 0 1 0-9.5zM14.25 28.5a4.75 4.75 0 1 1 9.5 0 4.75 4.75 0 0 1-9.5 0z" />
+                </svg>
+                <span data-i18n="v_figma">Ver en Figma</span>
+              </span>
+            </div>
+            <div class="ptgs"><span class="ptg">Figma</span><span class="ptg">UI/UX</span><span
+                class="ptg">Rebranding</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Proyecto 4 -->
+      <div class="pc rv" data-c="design">
+        <div class="pt" style="background:linear-gradient(135deg,#181808,#2e2d10)">🎮</div>
+        <div class="pns">
+          <div class="pns-c" data-i18n="c_des">Diseño · Ilustración</div>
+          <div class="pns-n" data-i18n="p4n">Sprites Videojuego 2D</div>
+        </div>
+        <div class="po">
+          <div class="pi">
+            <p class="pcat" data-i18n="c_des">Diseño · Ilustración</p>
+            <p class="pname" data-i18n="p4n">Sprites Videojuego 2D</p>
+            <p class="pdesc" data-i18n="p4d">Creación de sprites para videojuego 2D en Adobe Illustrator.</p>
+            <div class="ptgs"><span class="ptg">Illustrator</span><span class="ptg">Game Art</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Proyecto 5 -->
+      <div class="pc ft rv" data-c="design dev" onclick="window.open('https://tramites-mara.netlify.app/', '_blank')">
+        <img src="assets/rebranding-vehiculos.png" alt="Rebranding Vehículos" style="width:100%; height:100%; object-fit:cover; transition: transform .6s var(--ease);">
+        <div class="pns">
+          <div class="pns-c" data-i18n="c_dd">Diseño · UI/UX</div>
+          <div class="pns-n" data-i18n="p5n">Rebranding Web Vehículos</div>
+        </div>
+        <div class="po">
+          <div class="pi">
+            <p class="pcat" data-i18n="c_dd">UI/UX · Rebranding</p>
+            <p class="pname" data-i18n="p5n">Rebranding Web Vehículos</p>
+            <p class="pdesc" data-i18n="p5d">Rediseño completo de plataforma de compra, venta de vehículos y trámites. Nueva identidad visual y experiencia de usuario. Explora el sitio web en vivo.</p>
+            <div style="margin-top: 1rem; margin-bottom: 1rem;">
+              <span class="cb s" style="padding: 0.5rem 1rem; font-size: 0.7rem; border-color: #2fb1be; color: #2fb1be;">
+                <svg width="12" height="12" fill="currentColor" viewBox="0 0 24 24" style="margin-right:5px">
+                  <path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zM11 7h2v6h-2zm0 8h2v2h-2z"/>
+                </svg>
+                <span data-i18n="v_site">Ver sitio web</span>
+              </span>
+            </div>
+            <div class="ptgs"><span class="ptg">UI/UX</span><span class="ptg">Rebranding</span><span class="ptg">Web</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Proyecto 6 -->
+      <div class="pc rv" data-c="3d">
+        <div class="pt" style="background:linear-gradient(135deg,#180a0a,#2c0e1e)">🕹️</div>
+        <div class="pns">
+          <div class="pns-c" data-i18n="c_3d">3D · Game</div>
+          <div class="pns-n" data-i18n="p6n">Juego 3D en Blender</div>
+        </div>
+        <div class="po">
+          <div class="pi">
+            <p class="pcat" data-i18n="c_3d">3D · Videojuego</p>
+            <p class="pname" data-i18n="p6n">Juego 3D en Blender</p>
+            <p class="pdesc" data-i18n="p6d">Videojuego 3D con modelado de assets y entornos en Blender.</p>
+            <div class="ptgs"><span class="ptg">Blender</span><span class="ptg">Game Dev</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Proyecto 7 -->
+      <div class="pc ft rv" data-c="research">
+        <div class="pt" style="background:linear-gradient(135deg,#17081a,#2d0a30)">🔬</div>
+        <div class="pns">
+          <div class="pns-c" data-i18n="c_res">Investigación</div>
+          <div class="pns-n" data-i18n="p7n">Acoso a Mujeres en Gaming</div>
+        </div>
+        <div class="po">
+          <div class="pi">
+            <p class="pcat" data-i18n="c_res">Investigación Académica</p>
+            <p class="pname" data-i18n="p7n">Acoso a Mujeres en Gaming</p>
+            <p class="pdesc" data-i18n="p7d">Investigación sobre la influencia del acoso hacia mujeres en videojuegos
+              multiplayer. Presentada como oradora en el Congreso Stratcom UdeM.</p>
+            <div class="ptgs"><span class="ptg">Investigación</span><span class="ptg">Gender</span><span
+                class="ptg">Gaming</span></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Skills -->
+  <div id="skills">
+    <div class="inn">
+      <p class="lbl" data-i18n="nav_skills">Habilidades</p>
+      <h2 class="st rv" data-i18n="sk_t">Lo que sé hacer.</h2>
+      <div class="sg">
+        <div class="si rv">
+          <div class="si-ic">🌐</div>
+          <div class="si-n" data-i18n="sk1n">Universos Transmedia</div>
+          <div class="si-d" data-i18n="sk1d">Narrativas que atraviesan múltiples plataformas y formatos.</div>
+        </div>
+        <div class="si rv">
+          <div class="si-ic">🎨</div>
+          <div class="si-n" data-i18n="sk2n">UI/UX & Diseño</div>
+          <div class="si-d" data-i18n="sk2d">Diseño de interfaces y experiencias en Figma e Illustrator.</div>
+        </div>
+        <div class="si rv">
+          <div class="si-ic">🎬</div>
+          <div class="si-n" data-i18n="sk3n">Producción Audiovisual</div>
+          <div class="si-d" data-i18n="sk3d">Edición y producción de video en Premiere Pro y CapCut.</div>
+        </div>
+        <div class="si rv">
+          <div class="si-ic">🧊</div>
+          <div class="si-n" data-i18n="sk4n">3D & Animación</div>
+          <div class="si-d" data-i18n="sk4d">Modelado 3D y animación 2D/3D en Blender y Premiere.</div>
+        </div>
+        <div class="si rv">
+          <div class="si-ic">💻</div>
+          <div class="si-n" data-i18n="sk5n">Desarrollo Web</div>
+          <div class="si-d" data-i18n="sk5d">Programación frontend con HTML, CSS y JavaScript.</div>
+        </div>
+        <div class="si rv">
+          <div class="si-ic">🔍</div>
+          <div class="si-n" data-i18n="sk6n">Investigación</div>
+          <div class="si-d" data-i18n="sk6d">Metodología científica y análisis de datos cualitativos.</div>
+        </div>
+        <div class="si rv">
+          <div class="si-ic">📷</div>
+          <div class="si-n" data-i18n="sk7n">Fotografía & Cámara</div>
+          <div class="si-d" data-i18n="sk7d">Manejo de cámara, composición y fotografía profesional.</div>
+        </div>
+        <div class="si rv">
+          <div class="si-ic">👥</div>
+          <div class="si-n" data-i18n="sk8n">Estrategia de Audiencias</div>
+          <div class="si-d" data-i18n="sk8d">Análisis y comprensión de audiencias para comunicación efectiva.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Achievements -->
+  <div class="sc" id="achievements">
+    <p class="lbl" data-i18n="nav_achievements">Logros</p>
+    <h2 class="st rv" data-i18n="ach_t">Reconocimientos.</h2>
+    <div class="ag">
+      <div class="ac rv">
+        <div class="ac-ic">🎤</div>
+        <p class="ac-yr">2025</p>
+        <h3 class="ac-t" data-i18n="a1t">Oradora — Congreso Stratcom</h3>
+        <p class="ac-d" data-i18n="a1d">Seleccionada como oradora en el Congreso Stratcom de la Universidad de Medellín,
+          presentando investigación sobre acoso a mujeres en videojuegos multiplayer.</p>
+      </div>
+      <div class="ac rv">
+        <div class="ac-ic">🏆</div>
+        <p class="ac-yr">2025</p>
+        <h3 class="ac-t" data-i18n="a2t">Nominada — Premios Huella 2025</h3>
+        <p class="ac-d" data-i18n="a2d">Nominada en los Premios Huella 2025 de la Universidad de Medellín,
+          reconocimiento que celebra el talento de sus estudiantes más destacados.</p>
+      </div>
+      <div class="ac rv">
+        <div class="ac-ic">🎓</div>
+        <p class="ac-yr">2024 – 2025</p>
+        <h3 class="ac-t" data-i18n="a3t">Universidad de Medellín</h3>
+        <p class="ac-d" data-i18n="a3d">Estudiante activa del programa de Comunicación y Entretenimiento Digital con
+          proyectos en diseño, animación, investigación y desarrollo web.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Contact -->
+  <div class="sc" id="contact" style="text-align:center;padding-bottom:9rem">
+    <p class="lbl" style="justify-content:center" data-i18n="nav_contact">Contacto</p>
+    <h2 class="st rv" data-i18n="con_t">Hablemos.</h2>
+    <p class="cem rv">lorenarojasarango2@gmail.com</p>
+    <p class="htag rv" style="margin-bottom:2.5rem" data-i18n="con_sub">¿Tienes un proyecto en mente? Me encantaría
+      escucharte.</p>
+    <div class="cls rv">
+      <a href="mailto:lorenarojasarango2@gmail.com" class="cb p">
+        <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+          <rect x="2" y="4" width="20" height="16" rx="2" />
+          <path d="m2 7 10 7 10-7" />
+        </svg>
+        <span data-i18n="con_em">Enviar email</span>
+      </a>
+      <a href="https://www.linkedin.com/in/lorena-rojas-arango-b78ab8197/" target="_blank" class="cb s">
+        <svg width="15" height="15" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2z" />
+          <circle cx="4" cy="4" r="2" />
+        </svg>
+        LinkedIn
+      </a>
+      <a href="https://wa.me/573105910739" target="_blank" class="cb s">
+        <svg width="15" height="15" fill="currentColor" viewBox="0 0 24 24">
+          <path
+            d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413z" />
+          <path
+            d="M12 0C5.373 0 0 5.373 0 12c0 2.136.564 4.135 1.534 5.876L0 24l6.278-1.499A11.95 11.95 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.807 9.807 0 0 1-5.028-1.382l-.36-.214-3.733.892.95-3.625-.236-.374A9.82 9.82 0 0 1 2.182 12c0-5.418 4.4-9.818 9.818-9.818 5.418 0 9.818 4.4 9.818 9.818 0 5.418-4.4 9.818-9.818 9.818z" />
+        </svg>
+        WhatsApp
+      </a>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <span>© 2025 Lorena Rojas Arango</span>
+    <span data-i18n="foot">Hecho con dedicación · Medellín, Colombia</span>
+  </footer>
+
+  <script src="js/script.js"></script>
+</body>
+
+</html>
