@@ -144,6 +144,8 @@ function setL(l) {
   });
   document.getElementById('bes').classList.toggle('on', l === 'es');
   document.getElementById('ben').classList.toggle('on', l === 'en');
+  document.getElementById('bes').setAttribute('aria-pressed', l === 'es');
+  document.getElementById('ben').setAttribute('aria-pressed', l === 'en');
 }
 
 /* ---- TOGGLE TEMA OSCURO / CLARO ---- */
@@ -151,8 +153,15 @@ function toggleT() {
   const h = document.documentElement;
   const isDark = h.getAttribute('data-theme') === 'dark';
   h.setAttribute('data-theme', isDark ? 'light' : 'dark');
-  document.getElementById('tb').innerHTML = isDark ? '<i class="ph ph-moon"></i>' : '<i class="ph ph-sun"></i>';
+  const btn = document.getElementById('tb');
+  btn.innerHTML = isDark ? '<i class="ph ph-moon"></i>' : '<i class="ph ph-sun"></i>';
+  btn.setAttribute('aria-label', isDark ? 'Cambiar a modo oscuro' : 'Cambiar a modo claro');
+  btn.setAttribute('aria-pressed', isDark);
 }
+
+document.getElementById('bes').addEventListener('click', () => setL('es'));
+document.getElementById('ben').addEventListener('click', () => setL('en'));
+document.getElementById('tb').addEventListener('click', toggleT);
 
 /* ---- LOADER — EFECTO SCRAMBLE ---- */
 const CHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*';
@@ -216,7 +225,7 @@ const obs = new IntersectionObserver(entries => {
 }, { threshold: .08, rootMargin: '0px 0px -40px 0px' });
 
 document.querySelectorAll('.rv').forEach((el, i) => {
-  el.style.transitionDelay = (i % 5) * .07 + 's';
+  el.classList.add('d' + (i % 5));
   obs.observe(el);
 });
 
@@ -224,18 +233,19 @@ document.querySelectorAll('.rv').forEach((el, i) => {
 document.querySelectorAll('.fb').forEach(btn => {
   btn.addEventListener('click', function () {
     if (this.classList.contains('on')) return; // Evitar doble clic en el mismo filtro
-    document.querySelectorAll('.fb').forEach(b => b.classList.remove('on'));
+    document.querySelectorAll('.fb').forEach(b => {
+      b.classList.remove('on');
+      b.setAttribute('aria-pressed', 'false');
+    });
     this.classList.add('on');
+    this.setAttribute('aria-pressed', 'true');
     const f = this.getAttribute('data-f');
     
     const cards = document.querySelectorAll('.pc');
     
     // Paso 1: Desvanecer todas las tarjetas suavemente
     cards.forEach(card => {
-      card.style.transition = 'opacity .3s var(--ease), transform .3s var(--ease)';
-      card.style.opacity = '0';
-      card.style.transform = 'scale(0.95)';
-      card.style.pointerEvents = 'none';
+      card.classList.add('is-fading');
     });
 
     // Paso 2: Esperar a que se desvanezcan, reorganizar y mostrar las correctas
@@ -244,7 +254,8 @@ document.querySelectorAll('.fb').forEach(btn => {
       cards.forEach(card => {
         const c = card.getAttribute('data-c') || '';
         const show = f === 'all' || c.includes(f);
-        card.style.display = show ? '' : 'none';
+        card.classList.toggle('is-hidden', !show);
+        card.setAttribute('aria-hidden', show ? 'false' : 'true');
       });
       
       // Forzar la recálculo del layout en el DOM para que la transición funcione
@@ -255,9 +266,7 @@ document.querySelectorAll('.fb').forEach(btn => {
         const c = card.getAttribute('data-c') || '';
         const show = f === 'all' || c.includes(f);
         if (show) {
-          card.style.opacity = '1';
-          card.style.transform = 'none';
-          card.style.pointerEvents = '';
+          card.classList.remove('is-fading');
         }
       });
     }, 300); // 300ms coincide con la transición en CSS
@@ -265,24 +274,98 @@ document.querySelectorAll('.fb').forEach(btn => {
 });
 
 /* ---- MENÚ MÓVIL ---- */
-function toggleMM() { document.getElementById('mm').classList.toggle('open'); }
-function closeMM() { document.getElementById('mm').classList.remove('open'); }
+function setMenuState(open) {
+  const menu = document.getElementById('mm');
+  const btn = document.getElementById('hb');
+  menu.classList.toggle('open', open);
+  btn.setAttribute('aria-expanded', open);
+  btn.setAttribute('aria-label', open ? 'Cerrar menú' : 'Abrir menú');
+}
+function toggleMM() { setMenuState(!document.getElementById('mm').classList.contains('open')); }
+function closeMM() { setMenuState(false); }
+
+document.getElementById('hb').addEventListener('click', toggleMM);
+document.querySelectorAll('.mm a').forEach(link => link.addEventListener('click', closeMM));
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') closeMM();
+});
+
+/* ---- CARGA DIFERIDA DE MEDIOS ---- */
+function loadVideo(video) {
+  if (video.dataset.loaded === 'true') return;
+  const src = video.dataset.src;
+  if (!src) return;
+  video.src = src;
+  video.dataset.loaded = 'true';
+  video.load();
+  video.play().catch(() => {});
+}
+
+function loadModel(model) {
+  if (model.dataset.loaded === 'true') return;
+  const src = model.dataset.src;
+  if (!src) return;
+  model.setAttribute('src', src);
+  model.dataset.loaded = 'true';
+}
+
+const mediaObs = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (!entry.isIntersecting) return;
+    const el = entry.target;
+    if (el.matches('video')) loadVideo(el);
+    if (el.matches('model-viewer')) loadModel(el);
+    mediaObs.unobserve(el);
+  });
+}, { rootMargin: '450px 0px', threshold: .01 });
+
+document.querySelectorAll('.lazy-video, model-viewer[data-src]').forEach(el => mediaObs.observe(el));
 
 /* ---- CONTROL DE AUDIO VIDEO ---- */
 const btnAudio = document.getElementById('btn-audio');
+const volIcon = document.getElementById('vol-icon');
+const volSlider = document.getElementById('vol-slider');
 const vidProj2 = document.getElementById('vid-proj2');
 
-if (btnAudio && vidProj2) {
+if (btnAudio && vidProj2 && volSlider && volIcon) {
+  // Función para actualizar icono según volumen
+  function updateVolIcon(v, muted) {
+    volIcon.className = 'ph';
+    if (muted || v == 0) {
+      volIcon.classList.add('ph-speaker-slash');
+    } else if (v < 0.5) {
+      volIcon.classList.add('ph-speaker-low');
+    } else {
+      volIcon.classList.add('ph-speaker-high');
+    }
+  }
+
+  // Click en el icono para mute/unmute
   btnAudio.addEventListener('click', (e) => {
-    e.stopPropagation(); // Evitar que el clic interfiera con otras interacciones
+    e.stopPropagation();
+    loadVideo(vidProj2);
+    
     if (vidProj2.muted) {
       vidProj2.muted = false;
-      btnAudio.textContent = '🔊 Mute';
-      btnAudio.style.background = 'rgba(255,255,255,0.2)';
+      const val = volSlider.value > 0 ? volSlider.value : 0.5;
+      vidProj2.volume = val;
+      volSlider.value = val;
     } else {
       vidProj2.muted = true;
-      btnAudio.textContent = '🔇 Unmute';
-      btnAudio.style.background = 'rgba(0,0,0,0.5)';
     }
+    updateVolIcon(vidProj2.volume, vidProj2.muted);
   });
+
+  // Cambio en el slider
+  volSlider.addEventListener('input', (e) => {
+    e.stopPropagation();
+    loadVideo(vidProj2);
+    const v = parseFloat(e.target.value);
+    vidProj2.volume = v;
+    vidProj2.muted = (v === 0);
+    updateVolIcon(v, vidProj2.muted);
+  });
+
+  // Evitar que el click en el slider propague al card (si el card tiene link o algo)
+  volSlider.addEventListener('click', e => e.stopPropagation());
 }

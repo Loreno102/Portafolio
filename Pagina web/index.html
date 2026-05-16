@@ -29,11 +29,11 @@
 
   <!-- Menú móvil -->
   <div class="mm" id="mm">
-    <a href="#about" data-i18n="nav_about" onclick="closeMM()">Sobre mí</a>
-    <a href="#projects" data-i18n="nav_projects" onclick="closeMM()">Proyectos</a>
-    <a href="#skills" data-i18n="nav_skills" onclick="closeMM()">Habilidades</a>
-    <a href="#achievements" data-i18n="nav_achievements" onclick="closeMM()">Logros</a>
-    <a href="#contact" data-i18n="nav_contact" onclick="closeMM()">Contacto</a>
+    <a href="#about" data-i18n="nav_about">Sobre mí</a>
+    <a href="#projects" data-i18n="nav_projects">Proyectos</a>
+    <a href="#skills" data-i18n="nav_skills">Habilidades</a>
+    <a href="#achievements" data-i18n="nav_achievements">Logros</a>
+    <a href="#contact" data-i18n="nav_contact">Contacto</a>
   </div>
 
   <!-- Navbar -->
@@ -47,10 +47,10 @@
       <li><a href="#contact" data-i18n="nav_contact">Contacto</a></li>
     </ul>
     <div class="nc">
-      <button class="lb2 on" id="bes" onclick="setL('es')">ES</button>
-      <button class="lb2" id="ben" onclick="setL('en')">EN</button>
-      <button class="tb" id="tb" onclick="toggleT()"><i class="ph ph-sun"></i></button>
-      <button class="hb" id="hb" onclick="toggleMM()">
+      <button class="lb2 on" id="bes" type="button" aria-label="Cambiar idioma a español" aria-pressed="true">ES</button>
+      <button class="lb2" id="ben" type="button" aria-label="Switch language to English" aria-pressed="false">EN</button>
+      <button class="tb" id="tb" type="button" aria-label="Cambiar a modo claro" aria-pressed="false"><i class="ph ph-sun"></i></button>
+      <button class="hb" id="hb" type="button" aria-label="Abrir menú" aria-controls="mm" aria-expanded="false">
         <span></span><span></span><span></span>
       </button>
     </div>
@@ -71,7 +71,7 @@
       </a>
     </div>
     <div class="hsc">
-      <div class="hsl"></div><span>scroll</span>
+      <div class="hsl"></div>
     </div>
   </section>
 
@@ -83,7 +83,7 @@
           <circle cx="12" cy="8" r="4" />
           <path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" />
         </svg>
-        <span style="font-size:.65rem;letter-spacing:.15em">FOTO · PRÓXIMAMENTE</span>
+        <span class="photo-placeholder">FOTO · PRÓXIMAMENTE</span>
       </div>
     </div>
     <div class="at rv">
@@ -112,24 +112,24 @@
     <p class="lbl" data-i18n="nav_projects">Proyectos</p>
     <h2 class="st rv" data-i18n="proj_t">Mi trabajo.</h2>
     <div class="pfil rv">
-      <button class="fb on" data-f="all" data-i18n="f_all">Todos</button>
-      <button class="fb" data-f="design" data-i18n="f_design">Diseño</button>
-      <button class="fb" data-f="animation" data-i18n="f_anim">Animación</button>
-      <button class="fb" data-f="3d" data-i18n="f_3d">3D</button>
-      <button class="fb" data-f="research" data-i18n="f_res">Investigación</button>
-      <button class="fb" data-f="dev" data-i18n="f_dev">UX/UI</button>
+      <button class="fb on" type="button" data-f="all" data-i18n="f_all" aria-pressed="true">Todos</button>
+      <button class="fb" type="button" data-f="design" data-i18n="f_design" aria-pressed="false">Diseño</button>
+      <button class="fb" type="button" data-f="animation" data-i18n="f_anim" aria-pressed="false">Animación</button>
+      <button class="fb" type="button" data-f="3d" data-f="3d" data-i18n="f_3d" aria-pressed="false">3D</button>
+      <button class="fb" type="button" data-f="research" data-i18n="f_res" aria-pressed="false">Investigación</button>
+      <button class="fb" type="button" data-f="dev" data-i18n="f_dev" aria-pressed="false">UX/UI</button>
     </div>
     <div class="pg" id="pg">
 
       <!-- Proyecto Animación Caminata Emem -->
-      <div class="pc rv rect" data-c="animation">
-        <video src="assets/animacion-caminata-emem.mp4" autoplay loop muted playsinline
-          style="width: 100%; height: 100%; object-fit: cover;"></video>
-        <div class="pns" style="pointer-events: none;">
+      <div class="pc rv rect" data-c="animation" tabindex="0">
+        <video class="project-media lazy-video" data-src="assets/animacion-caminata-emem.mp4" loop muted playsinline
+          preload="none" aria-label="Video de caminata de Emem"></video>
+        <div class="pns">
           <div class="pns-c" data-i18n="c_an">Animación</div>
           <div class="pns-n" data-i18n="p13n">Caminata de Emem (Duik Angela)</div>
         </div>
-        <div class="po" style="pointer-events: none;">
+        <div class="po">
           <div class="pi">
             <p class="pcat" data-i18n="c_an">Animación</p>
             <p class="pname" data-i18n="p13n">Caminata de Emem (Duik Angela)</p>
@@ -142,14 +142,14 @@
       </div>
 
       <!-- Proyecto Animación Tradicional Emem -->
-      <div class="pc rv rect" data-c="animation">
-        <video src="assets/animacion-tradicional-emem.mp4" autoplay loop muted playsinline
-          style="width: 100%; height: 100%; object-fit: cover;"></video>
-        <div class="pns" style="pointer-events: none;">
+      <div class="pc rv rect" data-c="animation" tabindex="0">
+        <video class="project-media lazy-video" data-src="assets/animacion-tradicional-emem.mp4" loop muted playsinline
+          preload="none" aria-label="Video de animación tradicional de Emem"></video>
+        <div class="pns">
           <div class="pns-c" data-i18n="c_an">Animación</div>
           <div class="pns-n" data-i18n="p14n">Animación Tradicional de Emem</div>
         </div>
-        <div class="po" style="pointer-events: none;">
+        <div class="po">
           <div class="pi">
             <p class="pcat" data-i18n="c_an">Animación</p>
             <p class="pname" data-i18n="p14n">Animación Tradicional de Emem</p>
@@ -163,15 +163,15 @@
 
 
       <!-- Proyecto 3D Interactivo -->
-      <div class="pc ft rv" data-c="3d">
-        <model-viewer src="assets/escenario-3d.glb" camera-controls auto-rotate rotation-per-second="30deg"
-          interaction-prompt="none"
-          style="width: 100%; height: 100%; background: radial-gradient(circle at center, #1C1C28, #0A0A0F);"></model-viewer>
-        <div class="pns" style="pointer-events: none;">
+      <div class="pc ft rv" data-c="3d" tabindex="0">
+        <model-viewer class="project-model model-scene" data-src="assets/escenario-3d-optimized.glb" camera-controls auto-rotate
+          rotation-per-second="30deg" interaction-prompt="none" loading="lazy" reveal="auto"
+          aria-label="Modelo 3D interactivo de escenario"></model-viewer>
+        <div class="pns">
           <div class="pns-c" data-i18n="c_3d">3D · Game</div>
           <div class="pns-n" data-i18n="p8n">Escenario 3D Interactivo</div>
         </div>
-        <div class="po" style="pointer-events: none;">
+        <div class="po">
           <div class="pi">
             <p class="pcat" data-i18n="c_3d">3D · Videojuego</p>
             <p class="pname" data-i18n="p8n">Escenario 3D Interactivo</p>
@@ -183,15 +183,15 @@
       </div>
 
       <!-- Proyecto Fantasma Pac-Man -->
-      <div class="pc rv" data-c="3d">
-        <model-viewer src="assets/fantasma-pacman.glb" camera-controls auto-rotate rotation-per-second="30deg"
-          interaction-prompt="none"
-          style="width: 100%; height: 100%; background: radial-gradient(circle at center, #2d1060, #140826);"></model-viewer>
-        <div class="pns" style="pointer-events: none;">
+      <div class="pc rv" data-c="3d" tabindex="0">
+        <model-viewer class="project-model model-ghost" data-src="assets/fantasma-pacman.glb" camera-controls auto-rotate
+          rotation-per-second="30deg" interaction-prompt="none" loading="lazy" reveal="auto"
+          aria-label="Modelo 3D interactivo de fantasma Pac-Man"></model-viewer>
+        <div class="pns">
           <div class="pns-c" data-i18n="c_3d">3D · Game</div>
           <div class="pns-n" data-i18n="p9n">Fantasma Pac-Man</div>
         </div>
-        <div class="po" style="pointer-events: none;">
+        <div class="po">
           <div class="pi">
             <p class="pcat" data-i18n="c_3d">3D · Modelado</p>
             <p class="pname" data-i18n="p9n">Fantasma Pac-Man</p>
@@ -203,15 +203,15 @@
       </div>
 
       <!-- Proyecto Caja de Madera -->
-      <div class="pc rv" data-c="3d">
-        <model-viewer src="assets/caja-madera.glb" camera-controls auto-rotate rotation-per-second="30deg"
-          interaction-prompt="none"
-          style="width: 100%; height: 100%; background: radial-gradient(circle at center, #2e2d10, #181808);"></model-viewer>
-        <div class="pns" style="pointer-events: none;">
+      <div class="pc rv" data-c="3d" tabindex="0">
+        <model-viewer class="project-model model-crate" data-src="assets/caja-madera.glb" camera-controls auto-rotate
+          rotation-per-second="30deg" interaction-prompt="none" loading="lazy" reveal="auto"
+          aria-label="Modelo 3D interactivo de caja de madera"></model-viewer>
+        <div class="pns">
           <div class="pns-c" data-i18n="c_3d">3D · Game</div>
           <div class="pns-n" data-i18n="p10n">Caja de Madera 3D</div>
         </div>
-        <div class="po" style="pointer-events: none;">
+        <div class="po">
           <div class="pi">
             <p class="pcat" data-i18n="c_3d">3D · Modelado</p>
             <p class="pname" data-i18n="p10n">Caja de Madera 3D</p>
@@ -223,15 +223,15 @@
       </div>
 
       <!-- Proyecto Arma 3D -->
-      <div class="pc rv" data-c="3d">
-        <model-viewer src="assets/arma.glb" camera-controls auto-rotate rotation-per-second="30deg"
-          interaction-prompt="none"
-          style="width: 100%; height: 100%; background: radial-gradient(circle at center, #301010, #180808);"></model-viewer>
-        <div class="pns" style="pointer-events: none;">
+      <div class="pc rv" data-c="3d" tabindex="0">
+        <model-viewer class="project-model model-weapon" data-src="assets/arma.glb" camera-controls auto-rotate
+          rotation-per-second="30deg" interaction-prompt="none" loading="lazy" reveal="auto"
+          aria-label="Modelo 3D interactivo de arma"></model-viewer>
+        <div class="pns">
           <div class="pns-c" data-i18n="c_3d">3D · Game</div>
           <div class="pns-n" data-i18n="p11n">Arma 3D</div>
         </div>
-        <div class="po" style="pointer-events: none;">
+        <div class="po">
           <div class="pi">
             <p class="pcat" data-i18n="c_3d">3D · Modelado</p>
             <p class="pname" data-i18n="p11n">Arma 3D</p>
@@ -243,15 +243,15 @@
       </div>
 
       <!-- Proyecto Casa Bruja -->
-      <div class="pc rv" data-c="3d">
-        <model-viewer src="assets/casa-bruja.glb" camera-controls auto-rotate rotation-per-second="30deg"
-          interaction-prompt="none"
-          style="width: 100%; height: 100%; background: radial-gradient(circle at center, #2a1b38, #100a18);"></model-viewer>
-        <div class="pns" style="pointer-events: none;">
+      <div class="pc rv" data-c="3d" tabindex="0">
+        <model-viewer class="project-model model-house" data-src="assets/casa-bruja.glb" camera-controls auto-rotate
+          rotation-per-second="30deg" interaction-prompt="none" loading="lazy" reveal="auto"
+          aria-label="Modelo 3D interactivo de casa de bruja"></model-viewer>
+        <div class="pns">
           <div class="pns-c" data-i18n="c_3d">3D · Game</div>
           <div class="pns-n" data-i18n="p12n">Casa de Bruja VR</div>
         </div>
-        <div class="po" style="pointer-events: none;">
+        <div class="po">
           <div class="pi">
             <p class="pcat" data-i18n="c_3d">3D · Entorno VR</p>
             <p class="pname" data-i18n="p12n">Casa de Bruja VR</p>
@@ -263,17 +263,20 @@
       </div>
 
       <!-- Proyecto 2 -->
-      <div class="pc ft rv" data-c="3d animation">
-        <video id="vid-proj2" src="assets/animacion-3d.mp4" autoplay loop muted playsinline
-          style="width: 100%; height: 100%; object-fit: cover;"></video>
-        <button id="btn-audio" class="audio-btn"
-          style="position: absolute; bottom: 20px; right: 20px; z-index: 10; background: rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.2); color: #fff; padding: 8px 16px; border-radius: 20px; cursor: pointer; backdrop-filter: blur(5px); font-family: 'DM Sans', sans-serif; font-size: 0.9rem; transition: background 0.3s;">🔇
-          Unmute</button>
-        <div class="pns" style="pointer-events: none;">
+      <div class="pc ft rv" data-c="3d animation" tabindex="0">
+        <video id="vid-proj2" class="project-media lazy-video" data-src="assets/animacion-3d.mp4" loop muted playsinline
+          preload="none" aria-label="Video de animación 3D en Blender"></video>
+        <div class="audio-ctrl-group">
+          <button id="btn-audio" class="audio-btn" type="button" aria-label="Activar audio del video">
+            <i class="ph ph-speaker-slash" id="vol-icon"></i>
+          </button>
+          <input type="range" id="vol-slider" class="vol-slider" min="0" max="1" step="0.01" value="0" aria-label="Ajustar volumen">
+        </div>
+        <div class="pns">
           <div class="pns-c" data-i18n="c_3da">3D · Animación</div>
           <div class="pns-n" data-i18n="p2n">Animación 3D en Blender</div>
         </div>
-        <div class="po" style="pointer-events: none;">
+        <div class="po">
           <div class="pi">
             <p class="pcat" data-i18n="c_3da">3D · Animación</p>
             <p class="pname" data-i18n="p2n">Animación 3D en Blender</p>
@@ -285,10 +288,11 @@
       </div>
 
       <!-- Proyecto 1 -->
-      <div class="pc ft rv" data-c="design dev"
-        onclick="window.open('https://www.figma.com/proto/1ocLASVo5O3tWYtbEQmW6U/Re-Branging-Comunicaci%C3%B3n-y-Relaciones-Coorporativas?node-id=1-313&t=yYqwZpS8I8Yo2fD6-1', '_blank')">
-        <img src="assets/udem-rebranding.png" alt="Rebranding UdeM"
-          style="width:100%; height:100%; object-fit:cover; transition: transform .6s var(--ease);">
+      <a class="pc ft rv project-link" data-c="design dev"
+        href="https://www.figma.com/proto/1ocLASVo5O3tWYtbEQmW6U/Re-Branging-Comunicaci%C3%B3n-y-Relaciones-Coorporativas?node-id=1-313&t=yYqwZpS8I8Yo2fD6-1"
+        target="_blank" rel="noopener noreferrer" aria-label="Abrir proyecto Rebranding Web UdeM en Figma">
+        <img class="project-media" src="assets/udem-rebranding.webp" alt="Rebranding UdeM" loading="lazy"
+          decoding="async">
         <div class="pns">
           <div class="pns-c" data-i18n="c_dd">Diseño · UI/UX</div>
           <div class="pns-n" data-i18n="p1n">Rebranding Web UdeM</div>
@@ -299,10 +303,9 @@
             <p class="pname" data-i18n="p1n">Rebranding Web UdeM</p>
             <p class="pdesc" data-i18n="p1d">Rediseño UI/UX de la página de Comunicación y Relaciones Corporativas de la
               Universidad de Medellín. Explora el sistema visual completo en el prototipo interactivo.</p>
-            <div style="margin-top: 1rem; margin-bottom: 1rem;">
-              <span class="cb s"
-                style="padding: 0.5rem 1rem; font-size: 0.7rem; border-color: var(--pink); color: var(--pink);">
-                <svg width="12" height="12" fill="currentColor" viewBox="0 0 38 38" style="margin-right:5px">
+            <div class="project-action-row">
+              <span class="cb s project-action project-action-figma">
+                <svg class="icon-inline" width="12" height="12" fill="currentColor" viewBox="0 0 38 38">
                   <path
                     d="M19 0a9.5 9.5 0 0 0-9.5 9.5c0 2.62 1.07 4.99 2.8 6.69A9.501 9.501 0 0 0 9.5 28.5 9.5 9.5 0 0 0 19 38a9.5 9.5 0 0 0 9.5-9.5 9.5 9.5 0 0 0-2.8-6.69c1.73-1.7 2.8-4.07 2.8-6.69A9.5 9.5 0 0 0 19 0zm0 4.75a4.75 4.75 0 1 1 0 9.5 4.75 4.75 0 0 1 0-9.5zM14.25 28.5a4.75 4.75 0 1 1 9.5 0 4.75 4.75 0 0 1-9.5 0z" />
                 </svg>
@@ -313,11 +316,12 @@
                 class="ptg">Rebranding</span></div>
           </div>
         </div>
-      </div>
+      </a>
 
       <!-- Proyecto 4 -->
-      <div class="pc rv" data-c="design">
-        <div class="pt" style="background:linear-gradient(135deg,#181808,#2e2d10)"><i class="ph ph-game-controller"></i></div>
+      <div class="pc rv" data-c="design" tabindex="0">
+        <div class="pt pt-sprites"><i class="ph ph-game-controller"></i>
+        </div>
         <div class="pns">
           <div class="pns-c" data-i18n="c_des">Diseño · Ilustración</div>
           <div class="pns-n" data-i18n="p4n">Sprites Videojuego 2D</div>
@@ -333,8 +337,10 @@
       </div>
 
       <!-- Proyecto 5 -->
-      <div class="pc ft rv" data-c="design dev" onclick="window.open('https://tramites-mara.netlify.app/', '_blank')">
-        <img src="assets/rebranding-vehiculos.png" alt="Rebranding Vehículos" style="width:100%; height:100%; object-fit:cover; transition: transform .6s var(--ease);">
+      <a class="pc ft rv project-link" data-c="design dev" href="https://tramites-mara.netlify.app/" target="_blank"
+        rel="noopener noreferrer" aria-label="Abrir sitio web del proyecto Rebranding Web Vehículos">
+        <img class="project-media" src="assets/rebranding-vehiculos.webp" alt="Rebranding Vehículos" loading="lazy"
+          decoding="async">
         <div class="pns">
           <div class="pns-c" data-i18n="c_dd">Diseño · UI/UX</div>
           <div class="pns-n" data-i18n="p5n">Rebranding Web Vehículos</div>
@@ -343,23 +349,26 @@
           <div class="pi">
             <p class="pcat" data-i18n="c_dd">UI/UX · Rebranding</p>
             <p class="pname" data-i18n="p5n">Rebranding Web Vehículos</p>
-            <p class="pdesc" data-i18n="p5d">Rediseño completo de plataforma de compra, venta de vehículos y trámites. Nueva identidad visual y experiencia de usuario. Explora el sitio web en vivo.</p>
-            <div style="margin-top: 1rem; margin-bottom: 1rem;">
-              <span class="cb s" style="padding: 0.5rem 1rem; font-size: 0.7rem; border-color: #2fb1be; color: #2fb1be;">
-                <svg width="12" height="12" fill="currentColor" viewBox="0 0 24 24" style="margin-right:5px">
-                  <path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zM11 7h2v6h-2zm0 8h2v2h-2z"/>
+            <p class="pdesc" data-i18n="p5d">Rediseño completo de plataforma de compra, venta de vehículos y trámites.
+              Nueva identidad visual y experiencia de usuario. Explora el sitio web en vivo.</p>
+            <div class="project-action-row">
+              <span class="cb s project-action project-action-site">
+                <svg class="icon-inline" width="12" height="12" fill="currentColor" viewBox="0 0 24 24">
+                  <path
+                    d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zM11 7h2v6h-2zm0 8h2v2h-2z" />
                 </svg>
                 <span data-i18n="v_site">Ver sitio web</span>
               </span>
             </div>
-            <div class="ptgs"><span class="ptg">UI/UX</span><span class="ptg">Rebranding</span><span class="ptg">Web</span></div>
+            <div class="ptgs"><span class="ptg">UI/UX</span><span class="ptg">Rebranding</span><span
+                class="ptg">Web</span></div>
           </div>
         </div>
-      </div>
+      </a>
 
       <!-- Proyecto 6 -->
-      <div class="pc rv" data-c="3d">
-        <div class="pt" style="background:linear-gradient(135deg,#180a0a,#2c0e1e)"><i class="ph ph-cube"></i></div>
+      <div class="pc rv" data-c="3d" tabindex="0">
+        <div class="pt pt-game"><i class="ph ph-cube"></i></div>
         <div class="pns">
           <div class="pns-c" data-i18n="c_3d">3D · Game</div>
           <div class="pns-n" data-i18n="p6n">Juego 3D en Blender</div>
@@ -375,8 +384,9 @@
       </div>
 
       <!-- Proyecto 7 -->
-      <div class="pc ft rv" data-c="research">
-        <div class="pt" style="background:linear-gradient(135deg,#17081a,#2d0a30)"><i class="ph ph-microscope"></i></div>
+      <div class="pc ft rv" data-c="research" tabindex="0">
+        <div class="pt pt-research"><i class="ph ph-microscope"></i>
+        </div>
         <div class="pns">
           <div class="pns-c" data-i18n="c_res">Investigación</div>
           <div class="pns-n" data-i18n="p7n">Acoso a Mujeres en Gaming</div>
@@ -413,7 +423,7 @@
           <div class="si-d" data-i18n="sk2d">Diseño de interfaces y experiencias en Figma e Illustrator.</div>
         </div>
         <div class="si rv">
-          <div class="si-ic"><i class="ph ph-clapperboard"></i></div>
+          <div class="si-ic"><i class="ph ph-film-slate"></i></div>
           <div class="si-n" data-i18n="sk3n">Producción Audiovisual</div>
           <div class="si-d" data-i18n="sk3d">Edición y producción de video en Premiere Pro y CapCut.</div>
         </div>
@@ -467,7 +477,7 @@
       </div>
       <div class="ac rv">
         <div class="ac-ic"><i class="ph ph-student"></i></div>
-        <p class="ac-yr">2024 – 2025</p>
+        <p class="ac-yr">2024 – 2027</p>
         <h3 class="ac-t" data-i18n="a3t">Universidad de Medellín</h3>
         <p class="ac-d" data-i18n="a3d">Estudiante activa del programa de Comunicación y Entretenimiento Digital con
           proyectos en diseño, animación, investigación y desarrollo web.</p>
@@ -476,11 +486,11 @@
   </div>
 
   <!-- Contact -->
-  <div class="sc" id="contact" style="text-align:center;padding-bottom:9rem">
-    <p class="lbl" style="justify-content:center" data-i18n="nav_contact">Contacto</p>
+  <div class="sc contact-section" id="contact">
+    <p class="lbl contact-label" data-i18n="nav_contact">Contacto</p>
     <h2 class="st rv" data-i18n="con_t">Hablemos.</h2>
     <p class="cem rv">lorenarojasarango2@gmail.com</p>
-    <p class="htag rv" style="margin-bottom:2.5rem" data-i18n="con_sub">¿Tienes un proyecto en mente? Me encantaría
+    <p class="htag rv contact-sub" data-i18n="con_sub">¿Tienes un proyecto en mente? Me encantaría
       escucharte.</p>
     <div class="cls rv">
       <a href="mailto:lorenarojasarango2@gmail.com" class="cb p">
