@@ -614,6 +614,27 @@ footer {
   font-size: .72rem; color: var(--dim);
 }
 
+/* ---- VER MÁS BUTTON ---- */
+.pg-m {
+  display: flex;
+  justify-content: center;
+  margin-top: 3.5rem;
+}
+#btn-m {
+  padding: .85rem 2.2rem;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: .6rem;
+}
+#btn-m i {
+  transition: transform .3s var(--ease);
+}
+#btn-m:hover i {
+  transform: translateY(3px);
+}
+
+
 /* ---- SCROLL REVEAL ---- */
 .rv {
   opacity: 0; transform: translateY(28px);

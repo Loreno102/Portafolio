@@ -14,7 +14,7 @@ const T = {
     a_p1: "Soy estudiante de <strong>Comunicación y Entretenimiento Digital</strong> en la Universidad de Medellín. Creo universos transmedia, diseño experiencias visuales y cuento historias que conectan con las audiencias.",
     a_p2: "Mi trabajo cruza mundos: del diseño a la animación 3D, de la investigación académica al desarrollo web. No solo creo — entiendo a quién le hablo y por qué.",
     proj_t: "Mi trabajo.", f_all: "Todos", f_design: "Diseño", f_anim: "Animación",
-    f_3d: "3D", f_res: "Investigación", f_dev: "Dev",
+    f_3d: "3D", f_res: "Investigación", f_dev: "UX/UI",
     c_dd: "Diseño · UI/UX", c_3da: "3D · Animación", c_an: "Animación",
     c_des: "Diseño · Ilustración", c_3d: "3D · Game", c_res: "Investigación",
     p1n: "Rebranding Web UdeM",
@@ -23,8 +23,8 @@ const T = {
     p2d: "Producción de animación 3D con modelado, iluminación y renderizado en Blender.",
     p3n: "Animación 2D en Premiere",
     p3d: "Animación 2D frame a frame creada en Adobe Premiere Pro.",
-    p4n: "Sprites Videojuego 2D",
-    p4d: "Creación de sprites para videojuego 2D en Adobe Illustrator.",
+    p4n: "Animaciones & Sprites 2D",
+    p4d: "Desarrollo de personajes y animaciones para videojuego 2D. Incluye ciclos de caminata, ataque y estados de enemigos, diseñados en Illustrator e integrados en Unity.",
     p5n: "Rebranding Web Vehículos",
     p5d: "Rediseño completo de plataforma de compra, venta de vehículos y trámites. Nueva identidad visual y experiencia de usuario. Explora el sitio web en vivo.",
     p6n: "Juego 3D en Blender",
@@ -66,7 +66,8 @@ const T = {
     con_em: "Enviar email",
     foot: "Hecho con dedicación · Medellín, Colombia",
     v_figma: "Ver en Figma",
-    v_site: "Ver sitio web"
+    v_site: "Ver sitio web",
+    m_more: "Ver más", m_less: "Ver menos"
   },
   en: {
     nav_about: "About", nav_projects: "Projects", nav_skills: "Skills",
@@ -77,7 +78,7 @@ const T = {
     a_p1: "I'm a <strong>Digital Communication & Entertainment</strong> student at Universidad de Medellín. I create transmedia universes, design visual experiences, and tell stories that connect with audiences.",
     a_p2: "My work bridges worlds: from design to 3D animation, from academic research to web development. I don't just create — I understand who I'm talking to and why.",
     proj_t: "My work.", f_all: "All", f_design: "Design", f_anim: "Animation",
-    f_3d: "3D", f_res: "Research", f_dev: "Dev",
+    f_3d: "3D", f_res: "Research", f_dev: "UX/UI",
     c_dd: "Design · UI/UX", c_3da: "3D · Animation", c_an: "Animation",
     c_des: "Design · Illustration", c_3d: "3D · Game", c_res: "Research",
     p1n: "UdeM Web Rebranding",
@@ -86,8 +87,8 @@ const T = {
     p2d: "3D animation production including modeling, lighting and rendering in Blender.",
     p3n: "2D Animation in Premiere",
     p3d: "Frame-by-frame 2D animation created in Adobe Premiere Pro.",
-    p4n: "2D Game Sprites",
-    p4d: "Design and creation of sprites for a 2D video game in Adobe Illustrator.",
+    p4n: "2D Animations & Sprites",
+    p4d: "Character and animation development for a 2D video game. Includes walk cycles, attacks, and enemy states, designed in Illustrator and integrated into Unity.",
     p5n: "Vehicle Platform Rebranding",
     p5d: "Complete redesign of a vehicle buying, selling and processing platform. New visual identity and user experience. Explore the live website.",
     p6n: "3D Game in Blender",
@@ -129,7 +130,8 @@ const T = {
     con_em: "Send email",
     foot: "Made with dedication · Medellín, Colombia",
     v_figma: "View on Figma",
-    v_site: "View live site"
+    v_site: "View live site",
+    m_more: "See more", m_less: "See less"
   }
 };
 
@@ -229,10 +231,46 @@ document.querySelectorAll('.rv').forEach((el, i) => {
   obs.observe(el);
 });
 
-/* ---- FILTROS DE PROYECTOS ---- */
+/* ---- FILTROS DE PROYECTOS & VER MÁS ---- */
+let pExp = false; // Proyectos expandidos
+const pLim = 6;   // Límite inicial
+
+function updateP(f) {
+  const cards = document.querySelectorAll('.pc');
+  const btnM = document.getElementById('btn-m');
+  const activeF = f || document.querySelector('.fb.on').getAttribute('data-f');
+  
+  let visibleCount = 0;
+  let totalMatch = 0;
+
+  cards.forEach((card, i) => {
+    const c = card.getAttribute('data-c') || '';
+    const matches = activeF === 'all' || c.includes(activeF);
+    if (matches) totalMatch++;
+
+    // Lógica de visibilidad
+    const show = matches && (activeF !== 'all' || pExp || visibleCount < pLim);
+    
+    if (show && matches) visibleCount++;
+
+    card.classList.toggle('is-hidden', !show);
+    card.setAttribute('aria-hidden', show ? 'false' : 'true');
+    card.classList.remove('is-fading');
+  });
+
+  // Mostrar botón solo si estamos en "Todos" y hay más proyectos que el límite
+  if (btnM) {
+    const showBtn = activeF === 'all' && totalMatch > pLim;
+    btnM.parentElement.style.display = showBtn ? 'flex' : 'none';
+    const span = btnM.querySelector('span');
+    if (span) span.setAttribute('data-i18n', pExp ? 'm_less' : 'm_more');
+    setL(lang); // Refrescar texto
+  }
+}
+
 document.querySelectorAll('.fb').forEach(btn => {
   btn.addEventListener('click', function () {
-    if (this.classList.contains('on')) return; // Evitar doble clic en el mismo filtro
+    if (this.classList.contains('on')) return;
     document.querySelectorAll('.fb').forEach(b => {
       b.classList.remove('on');
       b.setAttribute('aria-pressed', 'false');
@@ -242,36 +280,26 @@ document.querySelectorAll('.fb').forEach(btn => {
     const f = this.getAttribute('data-f');
     
     const cards = document.querySelectorAll('.pc');
-    
-    // Paso 1: Desvanecer todas las tarjetas suavemente
-    cards.forEach(card => {
-      card.classList.add('is-fading');
-    });
+    cards.forEach(card => card.classList.add('is-fading'));
 
-    // Paso 2: Esperar a que se desvanezcan, reorganizar y mostrar las correctas
-    setTimeout(() => {
-      // Aplicar display: none a las que no van, y display: block a las que sí
-      cards.forEach(card => {
-        const c = card.getAttribute('data-c') || '';
-        const show = f === 'all' || c.includes(f);
-        card.classList.toggle('is-hidden', !show);
-        card.setAttribute('aria-hidden', show ? 'false' : 'true');
-      });
-      
-      // Forzar la recálculo del layout en el DOM para que la transición funcione
-      document.body.offsetHeight;
-      
-      // Desvanecer hacia adentro (Fade-in) las tarjetas filtradas
-      cards.forEach(card => {
-        const c = card.getAttribute('data-c') || '';
-        const show = f === 'all' || c.includes(f);
-        if (show) {
-          card.classList.remove('is-fading');
-        }
-      });
-    }, 300); // 300ms coincide con la transición en CSS
+    setTimeout(() => updateP(f), 300);
   });
 });
+
+// Inicializar proyectos
+setTimeout(() => updateP('all'), 500);
+
+// Evento Ver más
+const btnM = document.getElementById('btn-m');
+if (btnM) {
+  btnM.addEventListener('click', () => {
+    pExp = !pExp;
+    updateP('all');
+    if (!pExp) {
+      document.getElementById('projects').scrollIntoView({ behavior: 'smooth' });
+    }
+  });
+}
 
 /* ---- MENÚ MÓVIL ---- */
 function setMenuState(open) {
