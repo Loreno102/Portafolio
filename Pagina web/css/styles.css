@@ -312,11 +312,13 @@ h1.hn .hi {
   justify-content: center; flex-direction: column;
   gap: .8rem; border: 1px solid var(--border);
   color: var(--muted); font-size: .72rem; letter-spacing: .1em;
+  overflow: hidden;
 }
-.aip svg { opacity: .35; }
-.photo-placeholder {
-  font-size: .65rem;
-  letter-spacing: .15em;
+.aip img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
 }
 .aiw::before {
   content: ''; position: absolute; inset: -10px;
@@ -572,6 +574,19 @@ h1.hn .hi {
   font-weight: 400; margin-bottom: .7rem; font-style: italic;
 }
 .ac-d { font-size: .82rem; color: var(--muted); line-height: 1.75; }
+.ac-link {
+  display: inline-flex; align-items: center; gap: .4rem;
+  margin-top: .85rem;
+  font-size: .72rem; letter-spacing: .08em;
+  color: var(--pink);
+  border: 1px solid var(--border2);
+  border-radius: 20px;
+  padding: .32rem .85rem;
+  background: rgba(201, 68, 157, .06);
+  transition: background .2s, border-color .2s, color .2s;
+  cursor: pointer;
+}
+.ac-link:hover { background: rgba(201, 68, 157, .15); border-color: var(--pink); color: var(--pink-l); }
 
 /* ---- CONTACT ---- */
 #contact,
