@@ -1,1 +1,0 @@
-este es un video en donde se ve un gampley de las animaciones que hice para un videojuego 2d, tiene caminata, idle, golpe en el aire y el suelo, salto, muerte, daño, y tambiense ven las animacoines de enemigos los cuales tienen una animacion de ataque, daño recibido, caminata, y muerte, todas las animaxiones fueron hechas en ilustrator y luego pasadas a unity 
