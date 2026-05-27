@@ -460,6 +460,10 @@ h1.hn .hi {
   border-color: #2fb1be !important;
   color: #2fb1be !important;
 }
+.project-action-instagram {
+  border-color: #E1306C !important;
+  color: #E1306C !important;
+}
 .icon-inline { margin-right: 5px; }
 .audio-ctrl-group {
   position: absolute;

@@ -27,8 +27,8 @@ const T = {
     p4d: "Desarrollo de personajes y animaciones para videojuego 2D. Incluye ciclos de caminata, ataque y estados de enemigos, diseñados en Illustrator e integrados en Unity.",
     p5n: "Rebranding Web Vehículos",
     p5d: "Rediseño completo de plataforma de compra, venta de vehículos y trámites. Nueva identidad visual y experiencia de usuario. Explora el sitio web en vivo.",
-    p6n: "Juego 3D en Blender",
-    p6d: "Videojuego 3D con modelado de assets y entornos en Blender.",
+    p6n: "Chairs Party — Juego 3D Móvil",
+    p6d: "Videojuego 3D para móviles. Diseño de la interfaz de personalización de personajes y modelado 3D de elementos interactivos.",
     p7n: "Acoso a Mujeres en Gaming",
     p7d: "Investigación sobre la influencia del acoso hacia mujeres en videojuegos multiplayer. Presentada como oradora en el Congreso Stratcom UdeM.",
     p8n: "Escenario 3D Interactivo",
@@ -69,6 +69,7 @@ const T = {
     foot: "Hecho con dedicación · Medellín, Colombia",
     v_figma: "Ver en Figma",
     v_site: "Ver sitio web",
+    v_instagram: "Ver en Instagram",
     m_more: "Ver más", m_less: "Ver menos"
   },
   en: {
@@ -93,8 +94,8 @@ const T = {
     p4d: "Character and animation development for a 2D video game. Includes walk cycles, attacks, and enemy states, designed in Illustrator and integrated into Unity.",
     p5n: "Vehicle Platform Rebranding",
     p5d: "Complete redesign of a vehicle buying, selling and processing platform. New visual identity and user experience. Explore the live website.",
-    p6n: "3D Game in Blender",
-    p6d: "3D video game development including asset and environment modeling in Blender.",
+    p6n: "Chairs Party — 3D Mobile Game",
+    p6d: "3D mobile video game. Character customization interface design and 3D modeling of interactive assets.",
     p7n: "Harassment of Women in Gaming",
     p7d: "Research on the influence of harassment toward women in multiplayer video games. Presented as speaker at Stratcom Congress, UdeM.",
     p8n: "Interactive 3D Environment",
@@ -135,6 +136,7 @@ const T = {
     foot: "Made with dedication · Medellín, Colombia",
     v_figma: "View on Figma",
     v_site: "View live site",
+    v_instagram: "View on Instagram",
     m_more: "See more", m_less: "See less"
   }
 };
