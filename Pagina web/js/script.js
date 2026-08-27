@@ -11,8 +11,8 @@ const T = {
     eyebrow: "Universidad de Medellín · Comunicación y Entretenimiento Digital",
     hero_tag: "Comunicadora · Diseñadora · Creadora", hero_cta: "Ver mis proyectos",
     a_hello: "Hola, soy Lorena.",
-    a_p1: "Soy estudiante de <strong>Comunicación y Entretenimiento Digital</strong> en la Universidad de Medellín. Creo universos transmedia, diseño experiencias visuales y cuento historias que conectan con las audiencias.",
-    a_p2: "Mi trabajo cruza mundos: del diseño a la animación 3D, de la investigación académica al desarrollo web. No solo creo — entiendo a quién le hablo y por qué.",
+    a_p1: "Soy estudiante de <strong>Comunicación y Entretenimiento Digital</strong> en la Universidad de Medellín. Me muevo de forma nativa en el ámbito digital y las nuevas formas de comunicar: creo universos transmedia, diseño experiencias visuales y cuento historias que conectan con las audiencias de hoy.",
+    a_p2: "Entiendo el entorno digital no solo como un canal, sino como un lenguaje vivo en constante evolución. Por eso mi trabajo cruza mundos: de la posproducción y los motion graphics a la animación 3D, la investigación y el desarrollo web — no solo creo, entiendo a quién le hablo y por qué.",
     proj_t: "Mi trabajo.", f_all: "Todos", f_design: "Diseño", f_anim: "Animación",
     f_3d: "3D", f_res: "Investigación", f_dev: "UX/UI",
     c_dd: "Diseño · UI/UX", c_3da: "3D · Animación", c_an: "Animación",
@@ -70,7 +70,25 @@ const T = {
     v_figma: "Ver en Figma",
     v_site: "Ver sitio web",
     v_instagram: "Ver en Instagram",
-    m_more: "Ver más", m_less: "Ver menos"
+    v_tiktok: "Ver en TikTok",
+    m_more: "Ver más", m_less: "Ver menos",
+    nav_proposal: "Enfoque",
+    vp_t: "Mi propuesta creativa.",
+    vp1n: "Posproducción & Motion Graphics",
+    vp1d: "Dominio de herramientas de edición y animación (Premiere Pro, CapCut, Duik Angela, Illustrator) para crear Motion Graphics y piezas audiovisuales con sensibilidad narrativa transmedia.",
+    vp2n: "Responsabilidad y mejora constante",
+    vp2d: "Cada proyecto se entrega, se documenta y se revisa — mis logros y reconocimientos son resultado de ese proceso, no de la casualidad.",
+    vp3n: "Conectar personas con historias",
+    vp3d: "Busco que cada edición y animación ayude a que marcas y creadores conecten con su audiencia mediante contenido intencional y cuidado.",
+    vp_statement: "Transformo material crudo en piezas audiovisuales con ritmo, intención y carácter. Desde el corte y la animación en Motion Graphics (Premiere, CapCut, Duik Angela) hasta la dirección de color y sonido, entrego contenido con criterio editorial pensado para destacar en cada plataforma.",
+    vp_ch1_t: "Edición de Pauta Comercial",
+    vp_ch1: "Edición y posproducción de contenido promocional para pauta publicitaria, diseñado para captar la atención desde los primeros segundos.",
+    vp_ch2_t: "Instagram Reels",
+    vp_ch2: "Reels de edición: procesos, antes y después, y detrás de cámaras de proyectos reales.",
+    vp_ch3_t: "TikTok & Formato Corto",
+    vp_ch3: "Formato vertical: transiciones dinámicas, tendencias de edición y tips de posproducción.",
+    sk3n: "Posproducción & Motion Graphics",
+    sk3d: "Edición de video en Premiere Pro y CapCut, combinada con animaciones en Motion Graphics y Duik Angela."
   },
   en: {
     nav_about: "About", nav_projects: "Projects", nav_skills: "Skills",
@@ -78,8 +96,8 @@ const T = {
     eyebrow: "Universidad de Medellín · Digital Communication & Entertainment",
     hero_tag: "Communicator · Designer · Creator", hero_cta: "See my work",
     a_hello: "Hi, I'm Lorena.",
-    a_p1: "I'm a <strong>Digital Communication & Entertainment</strong> student at Universidad de Medellín. I create transmedia universes, design visual experiences, and tell stories that connect with audiences.",
-    a_p2: "My work bridges worlds: from design to 3D animation, from academic research to web development. I don't just create — I understand who I'm talking to and why.",
+    a_p1: "I'm a <strong>Digital Communication & Entertainment</strong> student at Universidad de Medellín. I thrive natively in the digital realm and new ways of communicating: creating transmedia universes, designing visual experiences, and telling stories that connect with today's audiences.",
+    a_p2: "I view the digital ecosystem not just as a channel, but as a living, evolving language. That's why my work spans worlds: from post-production and motion graphics to 3D animation, research, and web development — I don't just create, I understand who I'm speaking to and why.",
     proj_t: "My work.", f_all: "All", f_design: "Design", f_anim: "Animation",
     f_3d: "3D", f_res: "Research", f_dev: "UX/UI",
     c_dd: "Design · UI/UX", c_3da: "3D · Animation", c_an: "Animation",
@@ -115,7 +133,7 @@ const T = {
     sk_t: "What I do.",
     sk1n: "Transmedia Universes", sk1d: "Narratives that span multiple platforms and formats.",
     sk2n: "UI/UX & Design", sk2d: "Interface and experience design in Figma and Illustrator.",
-    sk3n: "Audiovisual Production", sk3d: "Video editing and production in Premiere Pro and CapCut.",
+    sk3n: "Post-production & Motion Graphics", sk3d: "Video editing in Premiere Pro and CapCut, combined with Motion Graphics animations and Duik Angela.",
     sk4n: "3D & Animation", sk4d: "3D modeling and 2D/3D animation in Blender and Premiere.",
     sk5n: "Web Development", sk5d: "Frontend programming with HTML, CSS and JavaScript.",
     sk6n: "Research", sk6d: "Scientific research methodology and qualitative data analysis.",
@@ -137,7 +155,23 @@ const T = {
     v_figma: "View on Figma",
     v_site: "View live site",
     v_instagram: "View on Instagram",
-    m_more: "See more", m_less: "See less"
+    v_tiktok: "View on TikTok",
+    m_more: "See more", m_less: "See less",
+    nav_proposal: "Approach",
+    vp_t: "My creative approach.",
+    vp1n: "Post-production & Motion Graphics",
+    vp1d: "Mastery of editing and animation tools (Premiere Pro, CapCut, Duik Angela, Illustrator) to create Motion Graphics and audiovisual pieces with transmedia narrative sensitivity.",
+    vp2n: "Responsibility and continuous improvement",
+    vp2d: "Every project is delivered, documented, and reviewed — my achievements and recognitions are the result of that process, not chance.",
+    vp3n: "Connecting people with stories",
+    vp3d: "I aim for every edit and animation to help brands and creators connect with their audience through intentional, polished content.",
+    vp_statement: "I transform raw footage into audiovisual pieces with rhythm, intention, and character. From editing and Motion Graphics (Premiere, CapCut, Duik Angela) to color and sound design, I deliver content with editorial vision built to stand out on every platform.",
+    vp_ch1_t: "Commercial Video Editing",
+    vp_ch1: "Editing and post-production of promotional video content, designed to capture attention from the first seconds.",
+    vp_ch2_t: "Instagram Reels",
+    vp_ch2: "Editing Reels: processes, before/afters, and behind the scenes of real projects.",
+    vp_ch3_t: "TikTok & Short Form",
+    vp_ch3: "Vertical format: dynamic transitions, editing trends, and post-production tips."
   }
 };
 
@@ -354,6 +388,51 @@ const mediaObs = new IntersectionObserver(entries => {
 }, { rootMargin: '450px 0px', threshold: .01 });
 
 document.querySelectorAll('.lazy-video, model-viewer[data-src]').forEach(el => mediaObs.observe(el));
+
+/* ---- CARGA DIFERIDA DE EMBEDS (INSTAGRAM / TIKTOK) ---- */
+function loadInstagramEmbed() {
+  if (window.instgrm && window.instgrm.Embeds) {
+    window.instgrm.Embeds.process();
+    return;
+  }
+  if (!document.querySelector('script[src*="instagram.com/embed.js"]')) {
+    const script = document.createElement('script');
+    script.async = true;
+    script.src = '//www.instagram.com/embed.js';
+    script.onload = () => {
+      if (window.instgrm && window.instgrm.Embeds) {
+        window.instgrm.Embeds.process();
+      }
+    };
+    document.body.appendChild(script);
+  }
+}
+
+function loadTikTokEmbed() {
+  if (!document.querySelector('script[src*="tiktok.com/embed.js"]')) {
+    const script = document.createElement('script');
+    script.async = true;
+    script.src = 'https://www.tiktok.com/embed.js';
+    document.body.appendChild(script);
+  }
+}
+
+const embedObs = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (!entry.isIntersecting) return;
+    const el = entry.target;
+    if (el.matches('.instagram-media') || el.querySelector('.instagram-media')) {
+      loadInstagramEmbed();
+      embedObs.unobserve(el);
+    }
+    if (el.matches('.tiktok-embed') || el.querySelector('.tiktok-embed')) {
+      loadTikTokEmbed();
+      embedObs.unobserve(el);
+    }
+  });
+}, { rootMargin: '450px 0px', threshold: .01 });
+
+document.querySelectorAll('.instagram-media, .tiktok-embed, .vpe-card-ig, .vpe-card-tt').forEach(el => embedObs.observe(el));
 
 /* ---- CONTROL DE AUDIO VIDEO ---- */
 const btnAudio = document.getElementById('btn-audio');
