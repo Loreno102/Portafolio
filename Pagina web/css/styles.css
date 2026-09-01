@@ -468,6 +468,10 @@ h1.hn .hi {
   border-color: #ff0050 !important;
   color: #ff0050 !important;
 }
+.project-action-drive {
+  border-color: #4285F4 !important;
+  color: #4285F4 !important;
+}
 .icon-inline { margin-right: 5px; }
 .audio-ctrl-group {
   position: absolute;
@@ -809,6 +813,42 @@ footer {
 }
 .vpc-btn {
   margin-top: auto;
+}
+.vpc-drive-banner {
+  display: flex;
+  justify-content: center;
+  margin-top: 2.5rem;
+}
+.vpc-drive-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: .75rem;
+  padding: .9rem 2.2rem;
+  border-radius: 60px;
+  background: linear-gradient(135deg, rgba(66, 133, 244, 0.12), rgba(52, 168, 83, 0.12));
+  border: 1px solid rgba(66, 133, 244, 0.35);
+  color: var(--text);
+  font-family: var(--fb);
+  font-size: .88rem;
+  letter-spacing: .05em;
+  text-decoration: none;
+  transition: all .3s var(--ease);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, .08);
+}
+.vpc-drive-btn:hover {
+  border-color: #4285F4;
+  background: linear-gradient(135deg, rgba(66, 133, 244, 0.25), rgba(52, 168, 83, 0.25));
+  transform: translateY(-3px);
+  color: var(--text);
+  box-shadow: 0 8px 25px rgba(66, 133, 244, 0.25);
+}
+.vpc-drive-btn i {
+  font-size: 1.4rem;
+  color: #4285F4;
+  transition: transform .3s var(--ease);
+}
+.vpc-drive-btn:hover i {
+  transform: scale(1.2) rotate(-5deg);
 }
 
 /* ---- RESPONSIVE ---- */
