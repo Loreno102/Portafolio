@@ -814,10 +814,16 @@ footer {
 .vpc-btn {
   margin-top: auto;
 }
+#proposal {
+  padding-bottom: 2.5rem;
+}
+#projects {
+  padding-top: 3.5rem;
+}
 .vpc-drive-banner {
   display: flex;
   justify-content: center;
-  margin-top: 2.5rem;
+  margin-top: 1.75rem;
 }
 .vpc-drive-btn {
   display: inline-flex;
