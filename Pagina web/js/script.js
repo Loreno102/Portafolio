@@ -8,15 +8,21 @@ const T = {
   es: {
     nav_about: "Sobre mí", nav_projects: "Proyectos", nav_skills: "Habilidades",
     nav_achievements: "Logros", nav_contact: "Contacto",
+    nav_experience: "Experiencia",
     eyebrow: "Universidad de Medellín · Comunicación y Entretenimiento Digital",
-    hero_tag: "Comunicadora · Diseñadora · Creadora", hero_cta: "Ver mis proyectos",
+    hero_tag: "Creación de Contenido · Edición Audiovisual · Comunicación Digital", hero_cta: "Ver mis proyectos",
     a_hello: "Hola, soy Lorena.",
-    a_p1: "Soy estudiante de <strong>Comunicación y Entretenimiento Digital</strong> en la Universidad de Medellín. Me muevo de forma nativa en el ámbito digital y las nuevas formas de comunicar: creo universos transmedia, diseño experiencias visuales y cuento historias que conectan con las audiencias de hoy.",
-    a_p2: "Entiendo el entorno digital no solo como un canal, sino como un lenguaje vivo en constante evolución. Por eso mi trabajo cruza mundos: de la posproducción y los motion graphics a la animación 3D, la investigación y el desarrollo web — no solo creo, entiendo a quién le hablo y por qué.",
+    a_p1: "Soy estudiante de <strong>Comunicación y Entretenimiento Digital</strong> en la Universidad de Medellín. Me interesa especialmente la creación de contenido audiovisual: editar videos, construir narrativas visuales y adaptar el material al lenguaje de cada plataforma.",
+    a_p2: "He editado videos y reels para redes sociales, trabajo con CapCut y Premiere Pro, y tengo formación en motion graphics, animación, diseño visual y desarrollo de proyectos digitales. Todo eso me ayuda a entender el contenido desde varios ángulos — no solo estético, sino también comunicativo.",
     proj_t: "Mi trabajo.", f_all: "Todos", f_design: "Diseño", f_anim: "Animación",
-    f_3d: "3D", f_res: "Investigación", f_dev: "UX/UI",
+    f_3d: "3D", f_res: "Investigación", f_dev: "UX/UI", f_video: "Video",
     c_dd: "Diseño · UI/UX", c_3da: "3D · Animación", c_an: "Animación",
     c_des: "Diseño · Ilustración", c_3d: "3D · Game", c_res: "Investigación",
+    c_video: "Video · Pauta", c_reels: "Video · Reels",
+    p_pauta_n: "Pauta Comercial — Edición de Video",
+    p_pauta_d: "Edición y posproducción de contenido promocional para pauta publicitaria. Trabajo de ritmo, selección de tomas y presentación visual diseñados para captar la atención desde los primeros segundos.",
+    p_tattoo_n: "Reels para Tatuador — Formato Corto",
+    p_tattoo_d: "Edición de reels para un tatuador: selección de tomas, ritmo de corte y presentación visual del proceso, adaptados al formato corto para redes sociales.",
     p1n: "Rebranding Web UdeM",
     p1d: "Rediseño UI/UX de la página de Comunicación y Relaciones Corporativas de la Universidad de Medellín. Explora el sistema visual completo en el prototipo interactivo.",
     p2n: "Animación 3D en Blender",
@@ -46,14 +52,15 @@ const T = {
     p14n: "Animación Tradicional de Emem",
     p14d: "Animación 2D realizada cuadro a cuadro (frame por frame) del personaje 'Emem', explorando técnicas tradicionales en la suite de Adobe.",
     sk_t: "Lo que sé hacer.",
-    sk1n: "Universos Transmedia", sk1d: "Narrativas que atraviesan múltiples plataformas y formatos.",
-    sk2n: "UI/UX & Diseño", sk2d: "Diseño de interfaces y experiencias en Figma e Illustrator.",
-    sk3n: "Producción Audiovisual", sk3d: "Edición y producción de video en Premiere Pro y CapCut.",
-    sk4n: "3D & Animación", sk4d: "Modelado 3D y animación 2D/3D en Blender y Premiere.",
+    sk1n: "Narrativa & Transmedia", sk1d: "Construcción de narrativas que atraviesan múltiples plataformas y formatos digitales.",
+    sk2n: "UI/UX & Diseño Visual", sk2d: "Diseño de interfaces y piezas visuales en Figma e Illustrator.",
+    sk3n: "Edición de Video & Contenido", sk3d: "Edición de videos y reels en CapCut y Premiere Pro. Ritmo, selección de tomas y presentación visual para redes sociales.",
+    sk4n: "3D & Animación", sk4d: "Modelado 3D y animación 2D/3D en Blender y After Effects.",
     sk5n: "Desarrollo Web", sk5d: "Programación frontend con HTML, CSS y JavaScript.",
     sk6n: "Investigación", sk6d: "Metodología científica y análisis de datos cualitativos.",
     sk7n: "Fotografía & Cámara", sk7d: "Manejo de cámara, composición y fotografía profesional.",
-    sk8n: "Estrategia de Audiencias", sk8d: "Análisis y comprensión de audiencias para comunicación efectiva.",
+    sk8n: "Comunicación Digital", sk8d: "Comprensión de audiencias y lenguaje de plataformas digitales para adaptar el contenido a cada canal.",
+    sk_mg_n: "Motion Graphics & Posproducción", sk_mg_d: "Animaciones en Motion Graphics y After Effects. Dirección de color, sonido y acabado visual para contenido audiovisual.",
     ach_t: "Reconocimientos.",
     a1t: "Oradora — Congreso Stratcom",
     a1d: "Seleccionada como oradora en el Congreso Stratcom de la Universidad de Medellín, presentando investigación sobre acoso a mujeres en videojuegos multiplayer.",
@@ -79,6 +86,9 @@ const T = {
     tag_transmedia: "Transmedia",
     tag_anim_2d: "Animación 2D",
     tag_research: "Investigación",
+    tag_video_edit: "Edición de Video",
+    tag_reels: "Reels",
+    tag_short_form: "Formato Corto",
     m_more: "Ver más", m_less: "Ver menos",
     nav_proposal: "Enfoque",
     vp_t: "Mi propuesta creativa.",
@@ -92,24 +102,65 @@ const T = {
     vp_ch1_t: "Edición de Pauta Comercial",
     vp_ch1: "Edición y posproducción de contenido promocional para pauta publicitaria, diseñado para captar la atención desde los primeros segundos.",
     vp_ch2_t: "Instagram Reels",
-    vp_ch2: "Reels de edición: procesos, antes y después, y detrás de cámaras de proyectos reales.",
+    vp_ch2: "Reels de proceso y detrás de cámaras de proyectos reales, editados en formato corto para captar la atención en los primeros segundos.",
     vp_ch3_t: "TikTok & Formato Corto",
     vp_ch3: "Formato vertical: transiciones dinámicas, tendencias de edición y tips de posproducción.",
-    sk3n: "Posproducción & Motion Graphics",
-    sk3d: "Edición de video en Premiere Pro y CapCut, combinada con animaciones en Motion Graphics y After Effects."
+    c_reels_promo: "Video · Promoción & Expectativa",
+    p_cars_n: "Reels Promocionales & Expectativa — Vehículos",
+    p_cars_d: "Edición de videos y reels promocionales y de expectativa para la venta de vehículos (Trámites Mara). Ritmo comercial, ganchos visuales y adaptación para redes sociales.",
+    p_car1_n: "Promo Vehículos #1 — Trámites Mara",
+    p_car1_d: "Edición de reel promocional para la venta de vehículos con ritmo dinámico, cortes precisos y llamados a la acción.",
+    p_car2_n: "Promo Vehículos #2 — Trámites Mara",
+    p_car2_d: "Video promocional para redes sociales enfocado en exhibición de autos, música de tendencia y ritmo comercial.",
+    p_car_teaser_n: "Video Expectativa — Venta de Autos",
+    p_car_teaser_d: "Edición de video de expectativa y misterio para el lanzamiento y comercialización de vehículos en redes sociales.",
+    p_udem_cat_n: "Categorías Muestra Universitaria — UdeM",
+    p_udem_cat_d: "Edición de reel dinámico presentando las categorías oficiales de la muestra de la Facultad de Ciencias Económicas.",
+    p_udem_m1_n: "Difusión Muestra Universitaria #1 — UdeM",
+    p_udem_m1_d: "Reel de difusión institucional y académica para la muestra universitaria de proyectos de la Universidad de Medellín.",
+    p_udem_m2_n: "Difusión Muestra Universitaria #2 — UdeM",
+    p_udem_m2_d: "Pieza audiovisual de formato corto para la cobertura y convocatoria de la muestra universitaria.",
+    v_reel_promo1: "Promo 1",
+    v_reel_promo2: "Promo 2",
+    v_reel_teaser: "Expectativa",
+    c_reels_udem: "Video · Muestra Universitaria",
+    p_muestra_n: "Muestra Universitaria UdeM — Categorías & Reels",
+    p_muestra_d: "Producción y edición de reels para la Facultad de Ciencias Económicas y Administrativas (Universidad de Medellín), comunicando las categorías, dinámicas del evento y contenido de difusión académica.",
+    v_reel_cat: "Categorías",
+    v_reel_muestra1: "Muestra 1",
+    v_reel_muestra2: "Muestra 2",
+    exp_t: "Experiencia freelance.",
+    exp1_role: "Editora de video freelance",
+    exp1_company: "Tatuador independiente · Redes sociales",
+    exp1_period: "Experiencia freelance",
+    exp1_desc: "Edición de videos y reels para un tatuador, adaptando el material audiovisual a formatos cortos para redes sociales. El trabajo incluyó la selección de tomas, el ritmo de corte y la presentación visual del proceso de tatuaje.",
+    exp2_role: "Edición de video & Reels comerciales",
+    exp2_company: "Trámites Mara · Venta de vehículos",
+    exp2_period: "Creación de contenido",
+    exp2_desc: "Producción y edición de reels promocionales y videos de expectativa para la venta de vehículos y servicios de trámites. Trabajo de dinamismo, ganchos de atención y ritmo comercial.",
+    exp3_role: "Edición de contenido & Cobertura",
+    exp3_company: "Universidad de Medellín · Fac. Ciencias Económicas",
+    exp3_period: "Difusión universitaria",
+    exp3_desc: "Creación y edición de reels informativos para la Muestra Universitaria de la Universidad de Medellín: presentación de categorías, cronogramas y piezas de difusión institucional."
   },
   en: {
     nav_about: "About", nav_projects: "Projects", nav_skills: "Skills",
     nav_achievements: "Achievements", nav_contact: "Contact",
+    nav_experience: "Experience",
     eyebrow: "Universidad de Medellín · Digital Communication & Entertainment",
-    hero_tag: "Communicator · Designer · Creator", hero_cta: "See my work",
+    hero_tag: "Content Creation · Audiovisual Editing · Digital Communication", hero_cta: "See my work",
     a_hello: "Hi, I'm Lorena.",
-    a_p1: "I'm a <strong>Digital Communication & Entertainment</strong> student at Universidad de Medellín. I thrive natively in the digital realm and new ways of communicating: creating transmedia universes, designing visual experiences, and telling stories that connect with today's audiences.",
-    a_p2: "I view the digital ecosystem not just as a channel, but as a living, evolving language. That's why my work spans worlds: from post-production and motion graphics to 3D animation, research, and web development — I don't just create, I understand who I'm speaking to and why.",
+    a_p1: "I'm a <strong>Digital Communication & Entertainment</strong> student at Universidad de Medellín. I'm especially interested in audiovisual content creation: editing videos, building visual narratives, and adapting material to each platform's language.",
+    a_p2: "I've edited videos and reels for social media, I work with CapCut and Premiere Pro, and I have training in motion graphics, animation, visual design, and digital project development. All of this helps me understand content from multiple angles — not just aesthetic, but communicative too.",
     proj_t: "My work.", f_all: "All", f_design: "Design", f_anim: "Animation",
-    f_3d: "3D", f_res: "Research", f_dev: "UX/UI",
+    f_3d: "3D", f_res: "Research", f_dev: "UX/UI", f_video: "Video",
     c_dd: "Design · UI/UX", c_3da: "3D · Animation", c_an: "Animation",
     c_des: "Design · Illustration", c_3d: "3D · Game", c_res: "Research",
+    c_video: "Video · Ad", c_reels: "Video · Reels",
+    p_pauta_n: "Commercial Ad — Video Editing",
+    p_pauta_d: "Editing and post-production of promotional video content for advertising. Pacing, shot selection and visual presentation designed to capture attention from the first seconds.",
+    p_tattoo_n: "Reels for Tattoo Artist — Short Form",
+    p_tattoo_d: "Editing reels for a tattoo artist: shot selection, edit pacing and visual presentation of the tattoo process, adapted to short-form format for social media.",
     p1n: "UdeM Web Rebranding",
     p1d: "UI/UX redesign of the Communication & Corporate Relations page at Universidad de Medellín. Explore the full visual system in the interactive prototype.",
     p2n: "3D Animation in Blender",
@@ -139,14 +190,15 @@ const T = {
     p14n: "Emem Traditional Animation",
     p14d: "Frame-by-frame 2D animation of the 'Emem' character, exploring traditional techniques in Adobe Suite.",
     sk_t: "What I do.",
-    sk1n: "Transmedia Universes", sk1d: "Narratives that span multiple platforms and formats.",
-    sk2n: "UI/UX & Design", sk2d: "Interface and experience design in Figma and Illustrator.",
-    sk3n: "Post-production & Motion Graphics", sk3d: "Video editing in Premiere Pro and CapCut, combined with Motion Graphics animations and After Effects.",
-    sk4n: "3D & Animation", sk4d: "3D modeling and 2D/3D animation in Blender and Premiere.",
+    sk1n: "Narrative & Transmedia", sk1d: "Building narratives that span multiple platforms and digital formats.",
+    sk2n: "UI/UX & Visual Design", sk2d: "Interface and visual piece design in Figma and Illustrator.",
+    sk3n: "Video Editing & Content", sk3d: "Video and reel editing in CapCut and Premiere Pro. Pacing, shot selection and visual presentation for social media.",
+    sk4n: "3D & Animation", sk4d: "3D modeling and 2D/3D animation in Blender and After Effects.",
     sk5n: "Web Development", sk5d: "Frontend programming with HTML, CSS and JavaScript.",
     sk6n: "Research", sk6d: "Scientific research methodology and qualitative data analysis.",
     sk7n: "Photography & Camera", sk7d: "Camera operation, composition and professional photography.",
-    sk8n: "Audience Strategy", sk8d: "Audience analysis and understanding for effective communication.",
+    sk8n: "Digital Communication", sk8d: "Understanding audiences and the language of digital platforms to adapt content to each channel.",
+    sk_mg_n: "Motion Graphics & Post-production", sk_mg_d: "Motion Graphics and After Effects animations. Color grading, sound and visual finishing for audiovisual content.",
     ach_t: "Achievements.",
     a1t: "Speaker — Stratcom Congress",
     a1d: "Selected as speaker at the Stratcom Communication Congress at Universidad de Medellín, presenting research on harassment of women in multiplayer gaming.",
@@ -172,6 +224,9 @@ const T = {
     tag_transmedia: "Transmedia",
     tag_anim_2d: "2D Animation",
     tag_research: "Research",
+    tag_video_edit: "Video Editing",
+    tag_reels: "Reels",
+    tag_short_form: "Short Form",
     m_more: "See more", m_less: "See less",
     nav_proposal: "Approach",
     vp_t: "My creative approach.",
@@ -185,9 +240,46 @@ const T = {
     vp_ch1_t: "Commercial Video Editing",
     vp_ch1: "Editing and post-production of promotional video content, designed to capture attention from the first seconds.",
     vp_ch2_t: "Instagram Reels",
-    vp_ch2: "Editing Reels: processes, before/afters, and behind the scenes of real projects.",
+    vp_ch2: "Process reels and behind the scenes of real projects, edited in short form to capture attention in the first seconds.",
     vp_ch3_t: "TikTok & Short Form",
-    vp_ch3: "Vertical format: dynamic transitions, editing trends, and post-production tips."
+    vp_ch3: "Vertical format: dynamic transitions, editing trends, and post-production tips.",
+    c_reels_promo: "Video · Promo & Teaser",
+    p_cars_n: "Commercial Promo & Teaser Reels — Vehicles",
+    p_cars_d: "Editing promotional and teaser reels for vehicle sales and documentation services (Trámites Mara). Commercial pacing, visual hooks, and social media adaptation.",
+    p_car1_n: "Vehicle Promo #1 — Trámites Mara",
+    p_car1_d: "Promotional reel editing for vehicle sales with dynamic pacing, sharp cuts, and strong calls to action.",
+    p_car2_n: "Vehicle Promo #2 — Trámites Mara",
+    p_car2_d: "Promotional video for social media focused on vehicle showcase, trending audio, and commercial rhythm.",
+    p_car_teaser_n: "Teaser Video — Vehicle Sales",
+    p_car_teaser_d: "Editing teaser video and mystery build-up for the launch and sale of vehicles on social media.",
+    p_udem_cat_n: "Academic Showcase Categories — UdeM",
+    p_udem_cat_d: "Dynamic reel editing presenting the official showcase categories of the Faculty of Economic Sciences.",
+    p_udem_m1_n: "UdeM Academic Showcase #1",
+    p_udem_m1_d: "Institutional and academic outreach reel for the Universidad de Medellín project showcase.",
+    p_udem_m2_n: "UdeM Academic Showcase #2",
+    p_udem_m2_d: "Short-form audiovisual piece for coverage and community call for the university academic showcase.",
+    v_reel_promo1: "Promo 1",
+    v_reel_promo2: "Promo 2",
+    v_reel_teaser: "Teaser",
+    c_reels_udem: "Video · Academic Showcase",
+    p_muestra_n: "UdeM Academic Showcase — Categories & Reels",
+    p_muestra_d: "Production and editing of reels for the Faculty of Economic & Administrative Sciences (Universidad de Medellín), communicating event categories, dynamics, and academic outreach content.",
+    v_reel_cat: "Categories",
+    v_reel_muestra1: "Showcase 1",
+    v_reel_muestra2: "Showcase 2",
+    exp_t: "Freelance experience.",
+    exp1_role: "Freelance video editor",
+    exp1_company: "Independent tattoo artist · Social media",
+    exp1_period: "Freelance experience",
+    exp1_desc: "Editing videos and reels for a tattoo artist, adapting audiovisual material to short formats for social media. The work included shot selection, edit pacing and visual presentation of the tattooing process.",
+    exp2_role: "Video editing & Commercial Reels",
+    exp2_company: "Trámites Mara · Vehicle sales",
+    exp2_period: "Content creation",
+    exp2_desc: "Production and editing of promotional reels and teaser videos for vehicle sales and registration services. Focus on dynamism, attention hooks, and commercial pacing.",
+    exp3_role: "Content editing & Coverage",
+    exp3_company: "Universidad de Medellín · Fac. Economic Sciences",
+    exp3_period: "Academic outreach",
+    exp3_desc: "Creation and editing of informative reels for the Universidad de Medellín Academic Showcase: presentation of categories, schedules, and institutional outreach pieces."
   }
 };
 
@@ -448,7 +540,11 @@ const embedObs = new IntersectionObserver(entries => {
   });
 }, { rootMargin: '450px 0px', threshold: .01 });
 
-document.querySelectorAll('.instagram-media, .tiktok-embed, .vpe-card-ig, .vpe-card-tt').forEach(el => embedObs.observe(el));
+document.querySelectorAll('.instagram-media, .tiktok-embed, .vpe-card-ig, .vpe-card-tt, .exp-card, .exp-media, .pc').forEach(el => embedObs.observe(el));
+// Carga proactiva del script de Instagram si hay embeds en la página
+if (document.querySelector('.instagram-media')) {
+  loadInstagramEmbed();
+}
 
 /* ---- CONTROL DE AUDIO VIDEO ---- */
 const btnAudio = document.getElementById('btn-audio');
@@ -498,3 +594,33 @@ if (btnAudio && vidProj2 && volSlider && volIcon) {
   // Evitar que el click en el slider propague al card (si el card tiene link o algo)
   volSlider.addEventListener('click', e => e.stopPropagation());
 }
+
+/* ---- INTERACTIVO: SELECTOR DE REELS EN EXPERIENCIA ---- */
+document.querySelectorAll('.exp-reel-switcher').forEach(switcher => {
+  const targetId = switcher.getAttribute('data-target');
+  const linkId = switcher.getAttribute('data-link');
+  const iframe = document.getElementById(targetId);
+  const link = document.getElementById(linkId);
+  const tabs = switcher.querySelectorAll('.exp-reel-tab');
+
+  tabs.forEach(tab => {
+    tab.addEventListener('click', (e) => {
+      e.preventDefault();
+      tabs.forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+      const newSrc = tab.getAttribute('data-src');
+      const newUrl = tab.getAttribute('data-url');
+      if (iframe && newSrc && iframe.src !== newSrc) {
+        iframe.style.opacity = '0.3';
+        iframe.src = newSrc;
+        setTimeout(() => {
+          iframe.style.opacity = '1';
+        }, 350);
+      }
+      if (link && newUrl) {
+        link.href = newUrl;
+      }
+    });
+  });
+});
+
