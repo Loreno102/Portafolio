@@ -1,0 +1,268 @@
+---
+import Base from '../layouts/Base.astro';
+import Tape from '../components/Tape.astro';
+import Banner from '../components/Banner.astro';
+import Player from '../components/Player.astro';
+import { t, routes, type Lang } from '../i18n/ui';
+import { areas, archive, awards } from '../data/projects';
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const s = t(lang);
+const areaName = (id: string) => areas.find((a) => a.id === id)?.name[lang] ?? id;
+const linkLabel = { figma: 'Figma', site: s.visit, instagram: 'Instagram' };
+const tapeWords = areas.map((a) => a.name[lang]);
+const arrow = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg>';
+---
+
+<Base lang={lang} tab="digital">
+  <section class="dhero wrap">
+    <div class="dhud mono" aria-hidden="true">
+      <span>{s.digitalKicker}</span>
+      <span>{archive.length} items</span>
+      <span data-timecode>00:00:00:00</span>
+    </div>
+    <h1 class="display dtitle">
+      <span>{s.digitalLine1}</span>
+      <span class="strike">{s.digitalLine2}</span>
+      <span><em>{s.digitalLine3}</em></span>
+    </h1>
+    <p class="dintro">{s.digitalIntro}</p>
+  </section>
+
+  <Tape items={tapeWords} variant="blue" />
+
+  <section class="section wrap areas-sec">
+    <p class="bin mono">{s.areasTitle}</p>
+    <ol class="areas">
+      {areas.map((a, i) => (
+        <li class="rv">
+          <span class="mono">{String(i + 1).padStart(2, '0')}</span>
+          <h2 class="display">{a.name[lang]}</h2>
+          <p>{a.text[lang]}</p>
+        </li>
+      ))}
+    </ol>
+  </section>
+
+  <section class="section wrap archive-sec" id="archivo">
+    <div class="arch-head">
+      <div>
+        <p class="bin mono">Bin 02</p>
+        <h2 class="display h2 rv">{s.archiveTitle}</h2>
+      </div>
+      <div class="filters" role="group" aria-label={s.areasTitle}>
+        <button type="button" class="mono" data-filter="all" aria-pressed="true">{s.filterAll}</button>
+        {areas.filter((a) => archive.some((x) => x.area === a.id)).map((a) => (
+          <button type="button" class="mono" data-filter={a.id} aria-pressed="false">{a.name[lang]}</button>
+        ))}
+      </div>
+    </div>
+
+    <ul class="archive">
+      {archive.map((item, i) => (
+        <li class="row" data-area={item.area} data-preview={item.media?.type === 'image' ? item.media.src : item.media?.type === 'video' ? `/media/${item.media.src}.webp` : undefined}>
+          <button class="row-head" type="button" aria-expanded="false" aria-controls={`p-${item.slug}`} data-cursor="open">
+            <span class="mono row-n">{String(i + 1).padStart(2, '0')}</span>
+            <span class="row-title">{item.title[lang]}</span>
+            <span class="mono row-area">{areaName(item.area)}</span>
+            <span class="mono row-year">{item.year ?? ""}</span>
+            <span class="row-icon" aria-hidden="true"></span>
+          </button>
+          <div class="row-panel" id={`p-${item.slug}`} hidden>
+            <div class="row-grid">
+              {item.media?.type === 'image' && (
+                <img class="row-media" src={item.media.src} alt={item.media.alt[lang]} loading="lazy" decoding="async" />
+              )}
+              {item.media?.type === 'video' && (
+                <button class="row-media row-video" type="button" data-cursor="play" data-play-src={`/media/${item.media.src}.mp4`} data-play-title={item.title[lang]} aria-label={`${s.reelPlay}: ${item.title[lang]}`}>
+                  <video data-src={`/media/${item.media.src}-loop.mp4`} poster={`/media/${item.media.src}.webp`} muted loop playsinline preload="none"></video>
+                </button>
+              )}
+              {item.media?.type === 'model' && (
+                <div class="row-media row-model" data-cursor="drag">
+                  <model-viewer data-src={item.media.src} camera-controls auto-rotate rotation-per-second="24deg" interaction-prompt="none" shadow-intensity="0.6" aria-label={`${item.title[lang]} — ${s.drag}`}></model-viewer>
+                  <span class="mono model-hint">↻ {s.drag}</span>
+                </div>
+              )}
+              <div class="row-body">
+                <p>{item.text[lang]}</p>
+                <p class="row-tools">{item.tools.map((x) => <span class="chip">{x}</span>)}</p>
+                {item.link && (
+                  <a class="btn" href={item.link.href} target="_blank" rel="noopener">{linkLabel[item.link.label]} <Fragment set:html={arrow} /></a>
+                )}
+              </div>
+            </div>
+          </div>
+        </li>
+      ))}
+    </ul>
+    <img class="preview" alt="" aria-hidden="true" />
+  </section>
+
+  <section class="section wrap awards-sec">
+    <p class="bin mono">{s.awardsTitle}</p>
+    <ul class="awards">
+      {awards.map((a) => (
+        <li class="rv">
+          <span class="display aw-year">{a.year}</span>
+          <div>
+            <h3>{a.title[lang]}</h3>
+            <p>{a.text[lang]}</p>
+          </div>
+        </li>
+      ))}
+    </ul>
+  </section>
+
+  <Banner kicker="← 01" title={s.tabEdit} cta={s.heroCta} href={routes[lang].edit} tone="lime" />
+  <Player lang={lang} />
+</Base>
+
+<style>
+  .dhero { min-height: 92svh; padding-top: 96px; padding-bottom: 60px; display: flex; flex-direction: column; }
+  .dhud {
+    display: flex; flex-wrap: wrap; gap: 8px 28px; padding-block: 12px;
+    border-block: 1px solid var(--line); color: var(--fg-2);
+  }
+  .dtitle { font-size: clamp(56px, 11vw, 200px); display: flex; flex-direction: column; margin-top: auto; padding-top: 40px; }
+  .dtitle em { font-style: normal; color: var(--accent); }
+  .strike { position: relative; width: fit-content; -webkit-text-stroke: 2px var(--fg); color: transparent; }
+  .dintro { max-width: 60ch; margin: 34px 0 0 auto; font-size: clamp(17px, 1.3vw, 21px); color: var(--fg-2); }
+
+  .areas { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); border-top: 1px solid var(--line); }
+  .areas li { padding: 22px 22px 30px 0; border-bottom: 1px solid var(--line); }
+  .areas li + li { padding-left: 22px; border-left: 1px solid var(--line); }
+  .areas span { color: var(--fg-2); }
+  .areas h2 { font-size: clamp(28px, 2.6vw, 42px); margin: 40px 0 12px; }
+  .areas p { margin: 0; color: var(--fg-2); font-size: 15px; }
+  @media (max-width: 760px) {
+    .areas li + li { padding-left: 0; border-left: 0; }
+    .areas h2 { margin-top: 16px; }
+  }
+
+  .arch-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: end; gap: 24px; margin-bottom: 40px; }
+  .filters { display: flex; flex-wrap: wrap; gap: 6px; }
+  .filters button {
+    padding: 9px 14px; border-radius: 999px; border: 1px solid var(--line); background: transparent; cursor: pointer; font-size: 11px;
+  }
+  .filters button[aria-pressed='true'] { background: var(--fg); color: var(--bg); border-color: var(--fg); }
+
+  .archive { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--fg); }
+  .row { border-bottom: 1px solid var(--line); }
+  .row[hidden] { display: none; }
+  .row-head {
+    width: 100%; display: grid; grid-template-columns: 60px minmax(0, 1fr) 220px 70px 30px; align-items: center; gap: 16px;
+    padding: 22px 0; border: 0; background: none; text-align: left; cursor: pointer;
+    transition: padding .4s var(--ease), color .3s;
+  }
+  .row-head:hover { padding-left: 14px; color: var(--accent); }
+  .row-n, .row-area, .row-year { color: var(--fg-2); }
+  .row-title {
+    font-family: var(--font-display); font-weight: 700; font-variation-settings: 'wdth' 80;
+    font-size: clamp(22px, 2.8vw, 46px); line-height: 1; text-transform: uppercase; letter-spacing: -.02em;
+  }
+  .row-icon { position: relative; width: 22px; height: 22px; justify-self: end; }
+  .row-icon::before, .row-icon::after { content: ''; position: absolute; left: 0; right: 0; top: 50%; height: 2px; background: currentColor; transition: transform .4s var(--ease); }
+  .row-icon::after { transform: rotate(90deg); }
+  .row-head[aria-expanded='true'] .row-icon::after { transform: rotate(0); }
+
+  .row-grid { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); gap: clamp(20px, 4vw, 60px); padding: 6px 0 40px 76px; }
+  .row-media { width: 100%; aspect-ratio: 16 / 10; object-fit: cover; border-radius: var(--radius); background: var(--bg-2); border: 1px solid var(--line); }
+  .row-video { padding: 0; overflow: hidden; cursor: pointer; display: block; }
+  .row-video video { width: 100%; height: 100%; object-fit: cover; }
+  .row-model { position: relative; }
+  .row-model model-viewer { width: 100%; height: 100%; --poster-color: transparent; }
+  .model-hint { position: absolute; left: 14px; bottom: 12px; color: var(--fg-2); font-size: 11px; }
+  .row-body p { margin: 0 0 16px; max-width: 48ch; }
+  .row-tools { display: flex; flex-wrap: wrap; gap: 6px; }
+  .row-grid:not(:has(.row-media)) { grid-template-columns: 1fr; }
+
+  .preview {
+    position: fixed; left: 0; top: 0; z-index: 40; width: 300px; aspect-ratio: 16 / 10; object-fit: cover;
+    border-radius: 14px; pointer-events: none; opacity: 0; transform: scale(.8) rotate(-4deg);
+    transition: opacity .25s, transform .4s var(--ease);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, .35);
+  }
+  .preview.is-on { opacity: 1; transform: scale(1) rotate(-4deg); }
+  .preview:not([src]) { display: none; }
+
+  @media (max-width: 860px) {
+    .row-head { grid-template-columns: 36px minmax(0, 1fr) 26px; }
+    .row-area, .row-year { display: none; }
+    .row-grid { grid-template-columns: 1fr; padding-left: 0; }
+    .preview { display: none; }
+  }
+
+  .awards { list-style: none; margin: 0; padding: 0; }
+  .awards li { display: grid; grid-template-columns: minmax(120px, 280px) minmax(0, 1fr); gap: 24px; padding-block: 26px; border-top: 1px solid var(--line); align-items: baseline; }
+  .aw-year { font-size: clamp(54px, 7vw, 110px); color: var(--accent); }
+  .awards h3 { font-family: var(--font-display); font-weight: 700; font-variation-settings: 'wdth' 80; font-size: clamp(24px, 2.4vw, 38px); text-transform: uppercase; margin: 0 0 6px; line-height: 1; }
+  .awards p { margin: 0; color: var(--fg-2); }
+  @media (max-width: 640px) { .awards li { grid-template-columns: 1fr; gap: 6px; } }
+</style>
+
+<script>
+  const rows = [...document.querySelectorAll<HTMLElement>('.row')];
+  let modelViewer: Promise<unknown> | null = null;
+
+  // Abrir / cerrar filas del archivo
+  rows.forEach((row) => {
+    const head = row.querySelector<HTMLButtonElement>('.row-head')!;
+    const panel = row.querySelector<HTMLElement>('.row-panel')!;
+    head.addEventListener('click', () => {
+      const open = head.getAttribute('aria-expanded') !== 'true';
+      head.setAttribute('aria-expanded', String(open));
+      panel.hidden = !open;
+      if (!open) {
+        panel.querySelector('video')?.pause();
+        return;
+      }
+      const video = panel.querySelector('video');
+      if (video) {
+        if (!video.src) video.src = video.dataset.src!;
+        video.play().catch(() => {});
+      }
+      const mv = panel.querySelector<HTMLElement>('model-viewer[data-src]');
+      if (mv) {
+        // El visor 3D solo se descarga cuando abres un modelo
+        modelViewer ??= import('@google/model-viewer');
+        modelViewer.then(() => {
+          mv.setAttribute('src', mv.dataset.src!);
+          mv.removeAttribute('data-src');
+        });
+      }
+    });
+  });
+
+  // Filtros por área
+  const buttons = document.querySelectorAll<HTMLButtonElement>('[data-filter]');
+  buttons.forEach((btn) =>
+    btn.addEventListener('click', () => {
+      const f = btn.dataset.filter;
+      buttons.forEach((b) => b.setAttribute('aria-pressed', String(b === btn)));
+      rows.forEach((row) => (row.hidden = f !== 'all' && row.dataset.area !== f));
+    }),
+  );
+
+  // Vista previa flotante al pasar el cursor (solo escritorio)
+  const preview = document.querySelector<HTMLImageElement>('.preview')!;
+  if (matchMedia('(hover: hover) and (pointer: fine)').matches) {
+    let px = 0, py = 0;
+    addEventListener('pointermove', (e) => {
+      px = e.clientX + 24; py = e.clientY - 90;
+      preview.style.left = `${px}px`;
+      preview.style.top = `${py}px`;
+    }, { passive: true });
+    rows.forEach((row) => {
+      const head = row.querySelector('.row-head')!;
+      head.addEventListener('pointerenter', () => {
+        const src = row.dataset.preview;
+        if (!src || head.getAttribute('aria-expanded') === 'true') return;
+        preview.src = src;
+        preview.classList.add('is-on');
+      });
+      head.addEventListener('pointerleave', () => preview.classList.remove('is-on'));
+      head.addEventListener('click', () => preview.classList.remove('is-on'));
+    });
+  }
+</script>

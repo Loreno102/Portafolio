@@ -1,0 +1,56 @@
+---
+import { t, type Lang } from '../i18n/ui';
+interface Props { lang: Lang }
+const s = t(Astro.props.lang);
+---
+
+<!-- Pantalla de carga: solo la primera vez en la sesión, menos de un segundo y medio -->
+<div class="loader" id="loader" aria-hidden="true">
+  <div class="loader-in">
+    <span class="mono loader-tc">00:00:00:00</span>
+    <span class="display loader-name">Lorena Rojas</span>
+    <span class="mono loader-sub">{s.loader}</span>
+    <span class="loader-bar"><i></i></span>
+  </div>
+</div>
+
+<style>
+  .loader {
+    position: fixed; inset: 0; z-index: 300;
+    display: none; place-items: center;
+    background: #0c0c0d; color: #eeece6;
+  }
+  :global(html.show-loader) .loader { display: grid; }
+  .loader.is-out { clip-path: inset(0 0 100% 0); transition: clip-path .7s var(--ease); }
+  .loader-in { display: grid; gap: 10px; justify-items: start; width: min(560px, 86vw); }
+  .loader-tc { color: var(--lime); font-size: 14px; }
+  .loader-name { font-size: clamp(52px, 11vw, 120px); }
+  .loader-sub { color: #a3a19b; }
+  .loader-bar { width: 100%; height: 2px; background: #2c2c30; margin-top: 8px; }
+  .loader-bar i { display: block; height: 100%; width: 0; background: var(--lime); transition: width 1.1s linear; }
+  .loader.is-run .loader-bar i { width: 100%; }
+</style>
+
+<script is:inline>
+  (function () {
+    var seen = false;
+    try { seen = sessionStorage.getItem('loader') === '1'; sessionStorage.setItem('loader', '1'); } catch (e) {}
+    if (seen || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    var d = document.documentElement;
+    d.classList.add('show-loader');
+    var el = document.getElementById('loader');
+    var tc = el.querySelector('.loader-tc');
+    var t0 = performance.now();
+    requestAnimationFrame(function () { el.classList.add('is-run'); });
+    (function step() {
+      var ms = performance.now() - t0;
+      var f = Math.min(24, Math.floor(ms / 1100 * 24));
+      tc.textContent = '00:00:0' + (f === 24 ? '1:00' : '0:' + String(f).padStart(2, '0'));
+      if (ms < 1100) requestAnimationFrame(step);
+      else {
+        el.classList.add('is-out');
+        setTimeout(function () { d.classList.remove('show-loader'); }, 750);
+      }
+    })();
+  })();
+</script>

@@ -1,0 +1,31 @@
+---
+import { t, type Lang } from '../i18n/ui';
+interface Props { lang: Lang }
+const s = t(Astro.props.lang);
+---
+
+<dialog id="player" class="player" aria-label={s.reelPlay}>
+  <div class="player-bar mono">
+    <span class="player-title"></span>
+    <button class="player-close ctrl" type="button">{s.close} ✕</button>
+  </div>
+  <video controls playsinline preload="none"></video>
+</dialog>
+
+<style>
+  .player {
+    width: fit-content; max-width: 94vw; max-height: 94vh; padding: 12px;
+    border: 1px solid var(--line); border-radius: var(--radius);
+    background: var(--bg-2); color: var(--fg);
+  }
+  .player::backdrop { background: rgba(5, 5, 6, .86); backdrop-filter: blur(6px); }
+  .player[open] { animation: pop .4s var(--ease); }
+  @keyframes pop { from { opacity: 0; transform: scale(.96); } }
+  .player-bar { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 0 4px 12px; }
+  .player video { display: block; width: auto; height: auto; max-width: min(1100px, 90vw); max-height: calc(94vh - 80px); min-width: 280px; border-radius: 12px; background: #000; }
+</style>
+
+<script>
+  import { initPlayer } from '../scripts/player';
+  initPlayer();
+</script>

@@ -1,0 +1,181 @@
+---
+import { t, type Lang } from '../i18n/ui';
+import { monitorClips } from '../data/projects';
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const s = t(lang);
+const clips = monitorClips.map((c) => ({ v: c.video, l: c.label[lang] }));
+---
+
+<section class="hero wrap">
+  <div class="hero-hud mono" aria-hidden="true">
+    <span class="rec"><i></i>REC</span>
+    <span>LRA_PORTAFOLIO_2026.prproj</span>
+    <span class="hide-sm" data-timecode>00:00:00:00</span>
+    <span class="hide-sm">Medellín, CO</span>
+  </div>
+
+  <h1 class="display hero-title">
+    <span class="sr-only">Lorena Rojas Arango — </span>
+    <span class="l1">{s.heroLine1}</span>
+    <span class="l2"><em>{s.heroLine2}</em></span>
+    <span class="l3">{s.heroLine3}</span>
+  </h1>
+
+  <figure class="monitor" data-clips={JSON.stringify(clips)}>
+    <div class="monitor-top mono">
+      <span>{s.monitorLabel}</span>
+      <span class="monitor-count">01/0{clips.length}</span>
+    </div>
+    <button class="monitor-screen" type="button" data-cursor="play" aria-label={s.reelPlay}>
+      <video muted playsinline preload="none" poster={`/media/${clips[0].v}.webp`} width="405" height="720"></video>
+      <span class="safe" aria-hidden="true"></span>
+    </button>
+    <figcaption class="monitor-bottom mono">
+      <span class="monitor-name">{clips[0].l}</span>
+      <span class="scrub"><i></i></span>
+    </figcaption>
+  </figure>
+
+  <p class="sticker mono" aria-hidden="true">● {s.available}</p>
+
+  <div class="hero-foot">
+    <p class="mono kicker">{s.heroKicker}</p>
+    <p class="hero-intro">{s.heroIntro}</p>
+    <a class="btn" href="#trabajos">
+      {s.heroCta}
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+    </a>
+  </div>
+</section>
+
+<style>
+  .hero {
+    position: relative;
+    min-height: 100svh;
+    padding-top: 96px; padding-bottom: 48px;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) clamp(220px, 24vw, 360px);
+    grid-template-rows: auto 1fr auto;
+    column-gap: clamp(20px, 4vw, 60px);
+  }
+
+  .hero-hud {
+    grid-column: 1 / -1;
+    display: flex; flex-wrap: wrap; gap: 8px 28px;
+    padding-block: 12px; margin-bottom: clamp(24px, 4vw, 48px);
+    border-block: 1px solid var(--line); color: var(--fg-2);
+  }
+  .rec { display: inline-flex; align-items: center; gap: 8px; color: var(--rec); }
+  .rec i { width: 9px; height: 9px; border-radius: 50%; background: var(--rec); animation: blink 1.2s steps(2) infinite; }
+  @keyframes blink { 50% { opacity: 0; } }
+
+  .hero-title {
+    grid-column: 1; align-self: center;
+    font-size: clamp(64px, 11.8vw, 210px);
+    display: flex; flex-direction: column;
+  }
+  .hero-title .l2 { padding-left: clamp(0px, 8vw, 140px); }
+  .hero-title em {
+    font-style: normal;
+    background: var(--accent); color: var(--accent-ink);
+    padding: 0 .08em; margin-left: -.04em;
+    display: inline-block; transform: rotate(-1.5deg);
+  }
+  .hero-title .l3 { -webkit-text-stroke: 2px var(--fg); color: transparent; }
+
+  .monitor {
+    grid-column: 2; grid-row: 2 / 4; align-self: center;
+    margin: 0; padding: 10px;
+    background: var(--bg-2); border: 1px solid var(--line); border-radius: var(--radius);
+    transform: rotate(2.5deg);
+    box-shadow: 0 30px 60px -20px rgba(0, 0, 0, .45);
+  }
+  .monitor-top, .monitor-bottom {
+    display: flex; justify-content: space-between; align-items: center; gap: 10px;
+    padding: 4px 6px 10px; color: var(--fg-2); font-size: 11px;
+  }
+  .monitor-bottom { padding: 12px 6px 4px; flex-direction: column; align-items: stretch; }
+  .monitor-name { color: var(--fg); }
+  .monitor-screen {
+    position: relative; display: block; width: 100%; padding: 0; border: 0;
+    aspect-ratio: 9 / 16; overflow: hidden; border-radius: 12px; background: #000;
+  }
+  .monitor-screen video { width: 100%; height: 100%; object-fit: cover; }
+  .safe {
+    position: absolute; inset: 8%; border: 1px dashed rgba(255, 255, 255, .35); pointer-events: none;
+  }
+  .scrub { height: 3px; background: var(--line); border-radius: 2px; overflow: hidden; }
+  .scrub i { display: block; height: 100%; width: 0; background: var(--accent); }
+
+  .sticker {
+    position: absolute; z-index: 2;
+    right: calc(var(--gutter) + clamp(170px, 19vw, 300px)); bottom: 15%;
+    background: var(--lime); color: #0c0c0d;
+    padding: 10px 14px; border-radius: 999px; margin: 0;
+    transform: rotate(-8deg);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, .25);
+  }
+
+  .hero-foot {
+    grid-column: 1; grid-row: 3;
+    display: grid; grid-template-columns: auto minmax(0, 46ch) auto; align-items: end;
+    gap: 16px 40px; margin-top: 40px;
+  }
+  .kicker { margin: 0; color: var(--accent); }
+  :global(:root[data-theme='light']) .kicker { color: var(--blue); }
+  .hero-intro { margin: 0; color: var(--fg-2); }
+
+  @media (max-width: 1100px) {
+    .hero-foot { grid-template-columns: 1fr; }
+    .sticker { bottom: 30%; }
+  }
+
+  @media (max-width: 760px) {
+    .hero { grid-template-columns: 1fr; padding-top: 76px; }
+    .hide-sm { display: none; }
+    .hero-title { font-size: clamp(54px, 17vw, 110px); }
+    .hero-title .l2 { padding-left: 0; }
+    .monitor { grid-column: 1; grid-row: auto; width: min(260px, 70%); margin: 34px 0 0 auto; }
+    .hero-foot { grid-row: auto; }
+    .sticker { position: relative; right: auto; top: auto; bottom: auto; justify-self: start; margin-top: -24px; }
+  }
+</style>
+
+<script>
+  import { openPlayer } from '../scripts/player';
+
+  // Monitor: en lugar de un showreel, va pasando fragmentos cortos de cada video
+  const fig = document.querySelector<HTMLElement>('.monitor');
+  if (fig) {
+    const clips: { v: string; l: string }[] = JSON.parse(fig.dataset.clips!);
+    const video = fig.querySelector('video')!;
+    const name = fig.querySelector('.monitor-name')!;
+    const count = fig.querySelector('.monitor-count')!;
+    const bar = fig.querySelector<HTMLElement>('.scrub i')!;
+    const screen = fig.querySelector('.monitor-screen')!;
+    const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    let i = 0;
+
+    const show = (n: number) => {
+      i = (n + clips.length) % clips.length;
+      const c = clips[i];
+      video.poster = `/media/${c.v}.webp`;
+      video.src = `/media/${c.v}-loop.mp4`;
+      name.textContent = c.l;
+      count.textContent = `${String(i + 1).padStart(2, '0')}/${String(clips.length).padStart(2, '0')}`;
+      if (!reduce) video.play().catch(() => {});
+    };
+
+    video.addEventListener('timeupdate', () => {
+      if (video.duration) bar.style.width = `${(video.currentTime / video.duration) * 100}%`;
+    });
+    video.addEventListener('ended', () => show(i + 1));
+    screen.addEventListener('click', () => openPlayer(`/media/${clips[i].v}.mp4`, clips[i].l));
+
+    // Arranca cuando la página ya cargó, para no competir con lo importante
+    const start = () => show(0);
+    if (document.readyState === 'complete') start();
+    else addEventListener('load', start, { once: true });
+  }
+</script>

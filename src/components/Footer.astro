@@ -1,0 +1,24 @@
+---
+import { t, type Lang } from '../i18n/ui';
+import { EMAIL, WHATSAPP, LINKEDIN, DRIVE } from '../data/projects';
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const s = t(lang);
+const arrow = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg>';
+---
+
+<footer class="contact wrap" id="contacto">
+  <p class="bin mono">{s.contactKicker}</p>
+  <h2 class="display contact-title rv">{s.contactTitle}</h2>
+  <a class="contact-mail rv" href={`mailto:${EMAIL}`} data-cursor="open">{EMAIL}</a>
+  <p class="lead">{s.contactSub}</p>
+  <div class="contact-links">
+    <a class="btn" href={WHATSAPP} target="_blank" rel="noopener">WhatsApp <Fragment set:html={arrow} /></a>
+    <a class="btn is-ghost" href={LINKEDIN} target="_blank" rel="noopener">LinkedIn <Fragment set:html={arrow} /></a>
+    <a class="btn is-ghost" href={DRIVE} target="_blank" rel="noopener">Google Drive <Fragment set:html={arrow} /></a>
+  </div>
+  <div class="footer-bar mono">
+    <span>© 2026 Lorena Rojas Arango</span>
+    <span>{s.footer} · 6.2442° N, 75.5812° W</span>
+  </div>
+</footer>

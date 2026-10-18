@@ -1,0 +1,27 @@
+---
+import Base from '../layouts/Base.astro';
+import Hero from '../components/Hero.astro';
+import Tape from '../components/Tape.astro';
+import Works from '../components/Works.astro';
+import Process from '../components/Process.astro';
+import About from '../components/About.astro';
+import Banner from '../components/Banner.astro';
+import Player from '../components/Player.astro';
+import { t, routes, type Lang } from '../i18n/ui';
+import { DRIVE } from '../data/projects';
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const s = t(lang);
+---
+
+<Base lang={lang} tab="edit">
+  <Hero lang={lang} />
+  <Tape items={s.tape} />
+  <Works lang={lang} />
+  <Banner kicker={s.driveKicker} title={s.driveTitle} cta={s.driveCta} href={DRIVE} external tone="lime" />
+  <Process lang={lang} />
+  <About lang={lang} />
+  <Tape items={s.tape} variant="blue" reverse />
+  <Banner kicker={s.nextKicker} title={s.nextTitle} cta={s.nextCta} href={routes[lang].digital} />
+  <Player lang={lang} />
+</Base>

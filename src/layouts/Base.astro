@@ -1,0 +1,81 @@
+---
+import '@fontsource-variable/bricolage-grotesque/wdth.css';
+import '@fontsource-variable/instrument-sans/wdth.css';
+import '@fontsource-variable/jetbrains-mono';
+import '../styles/global.css';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import Cursor from '../components/Cursor.astro';
+import Loader from '../components/Loader.astro';
+import { t, routes, type Lang } from '../i18n/ui';
+
+interface Props {
+  lang: Lang;
+  tab: 'edit' | 'digital';
+}
+const { lang, tab } = Astro.props;
+const s = t(lang);
+const title = tab === 'edit' ? s.metaEdit : s.metaDigital;
+const other: Lang = lang === 'es' ? 'en' : 'es';
+---
+
+<!doctype html>
+<html lang={lang} data-theme="dark" class="no-js">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={s.metaDesc} />
+    <meta name="theme-color" content="#0c0c0d" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="alternate" hreflang={other} href={routes[other][tab]} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={s.metaDesc} />
+    <meta property="og:type" content="website" />
+    <script is:inline>
+      // Tema antes de pintar, para que no parpadee
+      (function () {
+        var d = document.documentElement;
+        d.classList.remove('no-js');
+        var saved = null;
+        try { saved = localStorage.getItem('theme'); } catch (e) {}
+        var theme = saved || (matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+        d.setAttribute('data-theme', theme);
+      })();
+    </script>
+  </head>
+  <body>
+    <a class="skip" href="#main">{s.skip}</a>
+    <Loader lang={lang} />
+    <Header lang={lang} tab={tab} />
+    <main id="main">
+      <slot />
+    </main>
+    <Footer lang={lang} />
+    <Cursor lang={lang} />
+
+    <script>
+      // Reveal al hacer scroll
+      const io = new IntersectionObserver(
+        (entries) => entries.forEach((e) => {
+          if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+        }),
+        { threshold: 0.12, rootMargin: '0px 0px -40px 0px' },
+      );
+      document.querySelectorAll('.rv').forEach((el) => io.observe(el));
+
+      // Videos: solo se reproducen mientras están en pantalla
+      const vo = new IntersectionObserver(
+        (entries) => entries.forEach((e) => {
+          const v = e.target as HTMLVideoElement;
+          if (e.isIntersecting) {
+            if (!v.src && v.dataset.src) v.src = v.dataset.src;
+            v.play().catch(() => {});
+          } else v.pause();
+        }),
+        { rootMargin: '200px 0px' },
+      );
+      document.querySelectorAll<HTMLVideoElement>('video[data-auto]').forEach((v) => vo.observe(v));
+    </script>
+  </body>
+</html>

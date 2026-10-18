@@ -1,0 +1,267 @@
+---
+import { t, type Lang } from '../i18n/ui';
+import { works, DRIVE } from '../data/projects';
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const s = t(lang);
+const total = String(works.length).padStart(2, '0');
+const tones = ['blue', 'ink', 'lime'];
+const arrow = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg>';
+const play = '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 4v16l13-8z"/></svg>';
+---
+
+<section class="section works wrap" id="trabajos">
+  <header class="works-head">
+    <p class="bin mono">{s.binWork}</p>
+    <h2 class="display h2 rv">{s.workTitle}</h2>
+    <p class="lead rv">{s.workIntro}</p>
+  </header>
+
+  <ol class="stack">
+    {works.map((w, i) => (
+      <li class:list={['work', `is-${tones[i % tones.length]}`]} style={`--i:${i}`}>
+        <article class="work-in">
+          <div class="work-media">
+            {w.clips && (
+              <div class="clipset" data-clipset>
+                <button
+                  class="clip"
+                  type="button"
+                  data-cursor="play"
+                  data-play-src={`/media/${w.clips[0].video}.mp4`}
+                  data-play-title={`${w.title[lang]} · ${w.clips[0].label[lang]}`}
+                  aria-label={`${s.reelPlay}: ${w.title[lang]}`}
+                >
+                  <video data-auto data-src={`/media/${w.clips[0].video}-loop.mp4`} poster={`/media/${w.clips[0].video}.webp`} muted loop playsinline preload="none"></video>
+                  <span class="clip-tag mono"><Fragment set:html={play} /> {s.reelPlay}</span>
+                </button>
+                {w.clips.length > 1 && (
+                  <div class="ig-tabs" role="group">
+                    {w.clips.map((c, j) => (
+                      <button type="button" class="mono" data-video={c.video} data-label={`${w.title[lang]} · ${c.label[lang]}`} aria-pressed={j === 0 ? 'true' : 'false'}>{c.label[lang]}</button>
+                    ))}
+                  </div>
+                )}
+              </div>
+            )}
+            {w.reels && (
+              <div class="ig" data-ig>
+                <div class="ig-frame">
+                  <button class="ig-load" type="button" data-cursor="play">
+                    <span class="mono ig-rec"><i></i>Instagram · Reel</span>
+                    <span class="display ig-big"><Fragment set:html={play} /></span>
+                    <span class="mono">{s.loadReel}</span>
+                    <span class="ig-note">{s.loadReelNote}</span>
+                  </button>
+                </div>
+                <div class="ig-tabs" role="group">
+                  {w.reels.map((r, j) => (
+                    <button type="button" class="mono" data-id={r.id} aria-pressed={j === 0 ? 'true' : 'false'}>{r.label[lang]}</button>
+                  ))}
+                </div>
+              </div>
+            )}
+          </div>
+
+          <div class="work-info">
+            <p class="work-meta mono">
+              <span>{String(i + 1).padStart(2, '0')} / {total}</span>
+              <span>{w.format[lang]}</span>
+            </p>
+            <h3 class="display work-title">{w.title[lang]}</h3>
+            <dl class="work-dl">
+              <div><dt class="mono">{s.client}</dt><dd>{w.client[lang]}</dd></div>
+              <div><dt class="mono">{s.role}</dt><dd>{w.role[lang]}</dd></div>
+              <div><dt class="mono">{s.tools}</dt><dd class="chips">{w.tools.map((tool) => <span class="chip">{tool}</span>)}</dd></div>
+            </dl>
+            <div class="work-actions">
+              {w.reels && (
+                <a class="btn is-ghost" data-ig-link href={`https://www.instagram.com/reel/${w.reels[0].id}/`} target="_blank" rel="noopener">
+                  {s.openIg} <Fragment set:html={arrow} />
+                </a>
+              )}
+              {w.drive && (
+                <a class="btn is-ghost" href={DRIVE} target="_blank" rel="noopener">{s.openDrive} <Fragment set:html={arrow} /></a>
+              )}
+            </div>
+          </div>
+        </article>
+      </li>
+    ))}
+  </ol>
+</section>
+
+<style>
+  .works-head { margin-bottom: clamp(40px, 6vw, 90px); }
+
+  .stack { list-style: none; margin: 0; padding: 0; display: grid; gap: 7vh; }
+
+  /* Tarjetas que se apilan al hacer scroll */
+  .work {
+    position: sticky;
+    top: calc(84px + var(--i) * 12px);
+  }
+  .work-in {
+    --pad: clamp(16px, 2.6vw, 36px);
+    display: grid; grid-template-columns: auto minmax(0, 1fr);
+    gap: clamp(20px, 4vw, 60px);
+    padding: var(--pad);
+    min-height: min(80vh, 760px);
+    border-radius: calc(var(--radius) + 6px);
+    box-shadow: 0 -20px 50px -30px rgba(0, 0, 0, .55);
+    transform-origin: 50% 0;
+  }
+  .is-blue .work-in { background: var(--blue); color: #f4f3ff; }
+  .is-ink .work-in { background: var(--bg-2); color: var(--fg); border: 1px solid var(--line); }
+  .is-lime .work-in { background: var(--lime); color: #0c0c0d; }
+  .is-blue .btn.is-ghost, .is-lime .btn.is-ghost { color: inherit; border-color: currentColor; }
+
+  .work-media {
+    display: flex; gap: 12px; align-items: flex-start;
+  }
+
+  .clip {
+    position: relative; display: block; padding: 0; border: 0; overflow: hidden;
+    border-radius: var(--radius); background: #000; cursor: pointer;
+    aspect-ratio: 9 / 16; height: 100%;
+  }
+  .clip video { width: 100%; height: 100%; object-fit: cover; transition: transform .8s var(--ease); }
+  .clip:hover video { transform: scale(1.03); }
+  .clip-tag {
+    position: absolute; left: 12px; bottom: 12px;
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 8px 12px; border-radius: 999px;
+    background: rgba(12, 12, 13, .72); color: #fff; backdrop-filter: blur(6px);
+  }
+  .clip-tag :global(svg) { width: 10px; height: 10px; }
+
+  .work-info { display: flex; flex-direction: column; min-width: 0; }
+  .work-meta { display: flex; justify-content: space-between; gap: 12px; margin: 0; opacity: .75; }
+  .work-title { font-size: clamp(44px, 6.6vw, 118px); margin-top: auto; padding-top: 24px; overflow-wrap: anywhere; }
+  .work-dl { margin: 28px 0 0; display: grid; gap: 16px; }
+  .work-dl div { display: grid; grid-template-columns: 130px minmax(0, 1fr); gap: 12px; padding-top: 14px; border-top: 1px solid color-mix(in srgb, currentColor 22%, transparent); }
+  .work-dl dt { opacity: .7; padding-top: 3px; }
+  .work-dl dd { margin: 0; max-width: 52ch; }
+  .chips { display: flex; flex-wrap: wrap; gap: 6px; }
+  .work-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 26px; }
+  .work-actions:empty { display: none; }
+
+  /* Instagram bajo demanda */
+  .ig-frame {
+    position: relative; flex: 1; aspect-ratio: 9 / 16; min-height: 0;
+    border-radius: var(--radius); overflow: hidden; background: #0c0c0d;
+  }
+  .ig-frame :global(iframe) { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; background: #fff; }
+  .ig-load {
+    position: absolute; inset: 0; width: 100%; padding: 22px; border: 0; cursor: pointer;
+    display: flex; flex-direction: column; justify-content: space-between; align-items: flex-start; text-align: left;
+    color: #eeece6;
+    background:
+      repeating-linear-gradient(90deg, transparent 0 calc(100% / 6 - 1px), rgba(255,255,255,.06) calc(100% / 6 - 1px) calc(100% / 6)),
+      #111;
+  }
+  .ig-rec { display: inline-flex; align-items: center; gap: 8px; }
+  .ig-rec i { width: 8px; height: 8px; border-radius: 50%; background: var(--rec); }
+  .ig-big { font-size: 80px; color: var(--lime); }
+  .ig-big :global(svg) { width: 72px; height: 72px; }
+  .ig-note { font-size: 13px; color: #a3a19b; max-width: 26ch; }
+  .clipset, .ig { display: flex; flex-direction: column; gap: 10px; width: clamp(230px, 24vw, 330px); }
+  .clipset .clip { width: 100%; height: auto; }
+  .ig .ig-frame { flex: none; width: 100%; }
+  .ig-tabs { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+  .ig-tabs button {
+    padding: 9px 8px; border-radius: 10px; cursor: pointer; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    border: 1px solid currentColor; background: transparent; font-size: 10.5px;
+  }
+  .ig-tabs button:last-child:nth-child(odd) { grid-column: 1 / -1; }
+  .ig-tabs button[aria-pressed='true'] { background: currentColor; }
+  .ig-tabs button[aria-pressed='true'] { color: inherit; }
+  .is-blue .ig-tabs button[aria-pressed='true'] { background: #f4f3ff; color: var(--blue); border-color: #f4f3ff; }
+  .is-lime .ig-tabs button[aria-pressed='true'] { background: #0c0c0d; color: var(--lime); border-color: #0c0c0d; }
+  .is-ink .ig-tabs button[aria-pressed='true'] { background: var(--fg); color: var(--bg); border-color: var(--fg); }
+
+  @media (max-width: 860px) {
+    .work { position: relative; top: auto; }
+    .work-in { grid-template-columns: 1fr; min-height: 0; }
+    .work-media { height: auto; justify-content: center; }
+    .clip { height: auto; width: min(100%, 340px); margin-inline: auto; }
+    .ig, .clipset { width: min(100%, 340px); margin-inline: auto; }
+    .clipset .clip { width: 100%; flex: none; }
+    .ig-frame { flex: none; }
+    .work-dl div { grid-template-columns: 1fr; gap: 4px; }
+    .work-title { padding-top: 0; }
+  }
+</style>
+
+<script>
+  // Reels de Instagram: el iframe solo se crea cuando la persona lo pide
+  document.querySelectorAll<HTMLElement>('[data-ig]').forEach((box) => {
+    const frame = box.querySelector('.ig-frame')!;
+    const tabs = box.querySelectorAll<HTMLButtonElement>('.ig-tabs button');
+    const link = box.closest('.work')!.querySelector<HTMLAnchorElement>('[data-ig-link]');
+    let current = tabs[0].dataset.id!;
+
+    const load = () => {
+      let iframe = frame.querySelector('iframe');
+      if (!iframe) {
+        iframe = document.createElement('iframe');
+        iframe.loading = 'lazy';
+        iframe.title = 'Instagram reel';
+        iframe.setAttribute('allowtransparency', 'true');
+        frame.querySelector('.ig-load')?.remove();
+        frame.appendChild(iframe);
+      }
+      iframe.src = `https://www.instagram.com/reel/${current}/embed/`;
+    };
+
+    frame.querySelector('.ig-load')!.addEventListener('click', load);
+    tabs.forEach((tab) =>
+      tab.addEventListener('click', () => {
+        tabs.forEach((b) => b.setAttribute('aria-pressed', String(b === tab)));
+        current = tab.dataset.id!;
+        if (link) link.href = `https://www.instagram.com/reel/${current}/`;
+        if (frame.querySelector('iframe')) load();
+      }),
+    );
+  });
+
+  // Varios videos propios en una tarjeta: las pestañas cambian el clip
+  document.querySelectorAll<HTMLElement>('[data-clipset]').forEach((set) => {
+    const btn = set.querySelector<HTMLElement>('.clip')!;
+    const video = btn.querySelector('video')!;
+    const tabs = set.querySelectorAll<HTMLButtonElement>('.ig-tabs button');
+    tabs.forEach((tab) =>
+      tab.addEventListener('click', () => {
+        tabs.forEach((b) => b.setAttribute('aria-pressed', String(b === tab)));
+        const v = tab.dataset.video!;
+        btn.dataset.playSrc = `/media/${v}.mp4`;
+        btn.dataset.playTitle = tab.dataset.label;
+        video.poster = `/media/${v}.webp`;
+        video.dataset.src = `/media/${v}-loop.mp4`;
+        video.src = video.dataset.src;
+        video.play().catch(() => {});
+      }),
+    );
+  });
+
+  // Las tarjetas de atrás se encogen un poco al quedar tapadas
+  const cards = [...document.querySelectorAll<HTMLElement>('.work')];
+  const desktop = matchMedia('(min-width: 861px)');
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (!reduce) {
+    const update = () => {
+      if (!desktop.matches) return;
+      cards.forEach((card, i) => {
+        const next = cards[i + 1];
+        const inner = card.firstElementChild as HTMLElement;
+        if (!next) return;
+        const r = next.getBoundingClientRect();
+        const p = Math.min(1, Math.max(0, 1 - (r.top - 100) / innerHeight));
+        inner.style.transform = `scale(${1 - p * 0.05})`;
+        inner.style.filter = `brightness(${1 - p * 0.25})`;
+      });
+    };
+    addEventListener('scroll', () => requestAnimationFrame(update), { passive: true });
+    update();
+  }
+</script>

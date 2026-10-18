@@ -1,0 +1,123 @@
+---
+import { t, type Lang } from '../i18n/ui';
+interface Props { lang: Lang }
+const s = t(Astro.props.lang);
+---
+
+<!-- Cursor tipo visor de cámara: un punto y cuatro esquinas de enfoque -->
+<div class="cursor" aria-hidden="true" data-play={s.cursorPlay} data-open={s.cursorOpen} data-drag={s.cursorDrag}>
+  <div class="cursor-frame">
+    <i></i><i></i><i></i><i></i>
+    <span class="cursor-label mono"></span>
+  </div>
+  <div class="cursor-dot"></div>
+</div>
+
+<style>
+  .cursor { display: none; }
+
+  @media (hover: hover) and (pointer: fine) {
+    :global(html.has-cursor),
+    :global(html.has-cursor *) { cursor: none !important; }
+
+    .cursor {
+      display: block; position: fixed; inset: 0; z-index: 9999;
+      pointer-events: none;
+      opacity: 0; transition: opacity .3s;
+    }
+    .cursor.is-on { opacity: 1; }
+
+    .cursor-dot,
+    .cursor-frame {
+      position: absolute; left: 0; top: 0;
+      will-change: transform;
+    }
+    .cursor-dot {
+      width: 6px; height: 6px; margin: -3px 0 0 -3px;
+      border-radius: 50%; background: var(--lime);
+      mix-blend-mode: difference;
+    }
+    :global(:root[data-theme='light']) .cursor-dot { background: var(--blue); mix-blend-mode: normal; }
+
+    .cursor-frame {
+      --s: 34px;
+      width: var(--s); height: var(--s);
+      margin: calc(var(--s) / -2) 0 0 calc(var(--s) / -2);
+      transition: width .35s var(--ease), height .35s var(--ease), margin .35s var(--ease);
+      color: var(--fg);
+    }
+    .cursor-frame i {
+      position: absolute; width: 9px; height: 9px;
+      border: 1.5px solid currentColor;
+      transition: border-color .25s;
+    }
+    .cursor-frame i:nth-child(1) { left: 0; top: 0; border-right: 0; border-bottom: 0; }
+    .cursor-frame i:nth-child(2) { right: 0; top: 0; border-left: 0; border-bottom: 0; }
+    .cursor-frame i:nth-child(3) { left: 0; bottom: 0; border-right: 0; border-top: 0; }
+    .cursor-frame i:nth-child(4) { right: 0; bottom: 0; border-left: 0; border-top: 0; }
+
+    .cursor-label {
+      position: absolute; left: 50%; top: 50%;
+      transform: translate(-50%, -50%) scale(.6);
+      padding: 6px 10px; border-radius: 999px;
+      background: var(--lime); color: #0c0c0d;
+      font-size: 11px; white-space: nowrap;
+      opacity: 0; transition: opacity .25s, transform .35s var(--ease);
+    }
+
+    .cursor.is-hover .cursor-frame { --s: 86px; color: var(--lime); }
+    :global(:root[data-theme='light']) .cursor.is-hover .cursor-frame { color: var(--blue); }
+    .cursor.is-hover .cursor-label:not(:empty) { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+    .cursor.is-link .cursor-frame { --s: 52px; color: var(--lime); }
+    :global(:root[data-theme='light']) .cursor.is-link .cursor-frame { color: var(--blue); }
+    .cursor.is-down .cursor-frame { --s: 22px; }
+  }
+</style>
+
+<script>
+  const cursor = document.querySelector<HTMLElement>('.cursor')!;
+  const fine = matchMedia('(hover: hover) and (pointer: fine)').matches;
+
+  if (fine) {
+    document.documentElement.classList.add('has-cursor');
+    const dot = cursor.querySelector<HTMLElement>('.cursor-dot')!;
+    const frame = cursor.querySelector<HTMLElement>('.cursor-frame')!;
+    const label = cursor.querySelector<HTMLElement>('.cursor-label')!;
+    const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    let x = innerWidth / 2, y = innerHeight / 2, fx = x, fy = y;
+
+    addEventListener('pointermove', (e) => {
+      x = e.clientX; y = e.clientY;
+      cursor.classList.add('is-on');
+      dot.style.transform = `translate3d(${x}px, ${y}px, 0)`;
+    }, { passive: true });
+
+    document.addEventListener('pointerleave', () => cursor.classList.remove('is-on'));
+    addEventListener('pointerdown', () => cursor.classList.add('is-down'));
+    addEventListener('pointerup', () => cursor.classList.remove('is-down'));
+
+    const loop = () => {
+      fx += (x - fx) * (reduce ? 1 : 0.2);
+      fy += (y - fy) * (reduce ? 1 : 0.2);
+      frame.style.transform = `translate3d(${fx}px, ${fy}px, 0)`;
+      requestAnimationFrame(loop);
+    };
+    loop();
+
+    // Estados: data-cursor="play | open | drag" amplía el visor y muestra una etiqueta
+    document.addEventListener('pointerover', (e) => {
+      const el = (e.target as HTMLElement).closest<HTMLElement>('[data-cursor], a, button, summary');
+      cursor.classList.remove('is-hover', 'is-link');
+      label.textContent = '';
+      if (!el) return;
+      const kind = el.dataset.cursor;
+      if (kind && cursor.dataset[kind]) {
+        label.textContent = cursor.dataset[kind]!;
+        cursor.classList.add('is-hover');
+      } else {
+        cursor.classList.add('is-link');
+      }
+    });
+  }
+</script>

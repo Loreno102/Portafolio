@@ -1,0 +1,37 @@
+---
+// Bloque grande de llamada a la acción (Drive o cambio de pestaña)
+interface Props { kicker: string; title: string; cta: string; href: string; external?: boolean; tone?: 'blue' | 'lime' }
+const { kicker, title, cta, href, external = false, tone = 'blue' } = Astro.props;
+---
+
+<section class="wrap banner-wrap">
+  <a class:list={['banner', `is-${tone}`]} href={href} target={external ? '_blank' : undefined} rel={external ? 'noopener' : undefined} data-cursor="open">
+    <span class="mono">{kicker}</span>
+    <span class="display banner-title">{title}</span>
+    <span class="banner-cta mono">
+      {cta}
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+    </span>
+  </a>
+</section>
+
+<style>
+  .banner-wrap { padding-block: clamp(40px, 6vw, 80px); }
+  .banner {
+    display: grid; gap: 22px; text-decoration: none;
+    padding: clamp(26px, 5vw, 70px);
+    border-radius: calc(var(--radius) + 8px);
+    transition: transform .5s var(--ease);
+  }
+  .banner:hover { transform: rotate(-.6deg) scale(1.01); }
+  .is-blue { background: var(--blue); color: #f4f3ff; }
+  .is-lime { background: var(--lime); color: #0c0c0d; }
+  .banner-title { font-size: clamp(40px, 7vw, 120px); max-width: 16ch; }
+  .banner-cta {
+    display: inline-flex; align-items: center; gap: 12px; justify-self: start;
+    padding: 14px 20px; border-radius: 999px; border: 1.5px solid currentColor;
+    font-size: 13px;
+  }
+  .banner-cta svg { width: 16px; height: 16px; transition: transform .4s var(--ease); }
+  .banner:hover .banner-cta svg { transform: translateX(6px); }
+</style>
