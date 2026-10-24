@@ -13,7 +13,7 @@ Portafolio/
 │   ├── components/        ← piezas de la página (portada, tarjetas, cursor…)
 │   ├── views/             ← las dos pestañas
 │   ├── pages/             ← rutas: /, /digital/, /en/, /en/digital/
-│   └── assets/foto.png    ← tu foto (Astro la optimiza sola)
+│   └── assets/avatar.webp  ← tu avatar (Astro lo optimiza solo)
 ├── public/
 │   ├── media/             ← videos y pósters
 │   ├── img/               ← imágenes
